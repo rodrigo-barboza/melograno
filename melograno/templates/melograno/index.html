@@ -1,0 +1,52 @@
+{% extends 'melograno/layouts/base.html' %}
+{% load static %}
+
+{% block title %} Peça agora! {% endblock %}
+
+{% block content %}
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-7 slogan-text">
+            <span class="slogan-text--black">
+                A fome está te incomodando?
+            </span>
+            <span class="slogan-text--red">Melograno!</span>
+            <div id="search" class="mt-4">
+                <span class="search-icon">
+                    <img 
+                        src="{% static 'melograno/images/search-icon.png' %}"
+                        width="33" 
+                        alt=""
+                    >
+                </span>
+                <input 
+                    class="custom-input"
+                    type="text"
+                    placeholder="Procure restaurantes, lojas..."
+                />
+            </div>
+        </div>
+        <div class="col-md-5 d-flex justify-content-end">
+            <img src="{% static 'melograno/images/avatar-landing.png' %}" width="400" alt="">
+        </div>
+    </div>
+
+    <div>
+        <div class="payment-methods">
+            Pague com:
+        </div>
+        <div class="d-flex payment-items">
+            <div>
+                <img src="{% static 'melograno/images/money.png' %}" alt="">
+                <span>Dinheiro</span>
+            </div>
+            <div>
+                <img src="{% static 'melograno/images/credit-card.png' %}" alt="">
+                <span>Cartão de débito</span>
+            </div>
+            <div>
+                <img src="{% static 'melograno/images/coin.png' %}" alt="">
+                <span>Pix</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

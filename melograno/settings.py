@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,8 +31,9 @@ ALLOWED_HOSTS = ['192.168.100.120', '192.168.56.120', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'melograno',
     'client.apps.ClientConfig',
-    'guest.apps.GuestConfig',
+    'owner.apps.OwnerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
