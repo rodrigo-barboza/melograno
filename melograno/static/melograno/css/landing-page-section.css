@@ -1,0 +1,60 @@
+.custom-input:focus {
+    color: #1E1E1E;
+}
+
+.custom-input:focus {
+    border: 0 none;
+    outline: 0;
+}
+
+#search {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    margin-top: 7px;
+    margin-left: 7px;
+}
+
+.slogan-text {
+    margin-top: 100px;
+    color: #1E1E1E
+}
+
+.slogan-text--black {
+    line-height: 88px; 
+    font-size: 105px; 
+    font-weight: 500;
+}
+
+.slogan-text--red {
+    font-size: 116px; 
+    font-weight: 500; 
+    color: #F34444;
+}
+
+.payment-methods {
+    margin-top: -150px;
+    font-weight: 500;
+    color: #1E1E1E;
+    font-size: 32px;
+}
+
+.payment-items {
+    margin-top: 15px;
+    font-weight: 300;
+}
+
+.payment-items div {
+    margin-right: 26px;
+}
+
+.payment-items div img {
+    width: 41px;
+    margin-right: 5px;
+}
