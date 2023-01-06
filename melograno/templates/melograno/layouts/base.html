@@ -18,7 +18,6 @@
     
     <title>Melograno - {% block title %}{% endblock %}</title>
 </head>
-
 <body>
     <navbar class="d-flex justify-content-between px-4 melograno-navbar">
         <div id="logo" class="logo-align">
@@ -30,7 +29,7 @@
             <a href="" class="menu-item">Bebidas</a>
         </div>
         <div id="buttons" class="logo-align">
-            <button class="btn-signin"><a href="{% url 'login' %}">Entrar</a></button>
+             <a href="{% url 'login' %}" style="text-decoration: none; color: rgba(243, 243, 245, 1)"><button class="btn-signin">Entrar</button></a>
             <button class="btn-signup">Cadastre-se</button>
         </div>
     </navbar>

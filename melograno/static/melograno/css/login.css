@@ -1,19 +1,112 @@
+html, body {
+    overflow: hidden;
+   }
+
 .lado1{
     height: 100vh;
-    padding: 40px;
+    padding: 30px;
     background-color: rgba(222, 222, 222, 0.38);
 }
 
+.logo-align{
+    margin: 5px;
+}
+
 .textos{
-    padding: 50px;
+    padding: 90px;
     font-family: 'Lato'; 
 }
 
 .frase1{
     font-size: 35px;
+    font-weight: 600;
 }
 
 .frase2{
     font-size: 17px;
-    margin-top: 52px;
+    margin-top: 17px;
+    font-weight: 500;
+}
+
+.area-inputs{
+    padding-top: 45px;
+}
+
+.label-email{
+    font-family: 'Lato';
+    font-size: 17px;
+    font-weight: 600;
+    color: rgba(30, 30, 30, 0.75);
+}
+
+.box-email,.box-password{
+    margin-top: 10px;
+    width: 545px;
+    height: 65px;
+    border-radius: 33px;
+    background-color: rgba(221, 221, 221, 1);
+    border: none;
+    text-align: left;
+    
+}
+
+input[type="email"]{ 
+    padding: 15px;
+    font-size: 18px;
+    
+}
+
+.label-password{
+    padding-top: 30px;
+    font-family: 'Lato';
+    font-size: 17px;
+    font-weight: 600;
+    color: rgba(30, 30, 30, 0.75);
+}
+
+
+
+input[type="password"]{ 
+    padding: 15px;
+    font-size: 20px;
+   
+}
+
+.lembrete-senha{
+    margin-top: 8px;
+    margin-left: 3px;
+    font-family: 'Lato';
+    font-size: 13px;
+    font-weight: 500;
+
+}
+
+.button-entrar{
+    margin-top: 60px;
+    width: 545px;
+    height: 65px;
+    background-color: rgba(243, 68, 68, 1);
+    color: rgba(243, 243, 245, 1);
+    font-family: 'Lato';
+    font-size: 24px;
+    font-weight: 600;
+    border: none;
+    border-radius: 33px;
+}
+
+.final-message{
+    width: 100vh;
+    margin-top: 50px;
+    margin-left: 120px;
+}
+
+.msg-cadastre,.msg-cadastre2{
+    font-family: 'Lato';
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.msg-cadastre2{
+    color: rgba(243, 68, 68, 1);
+    
 }
