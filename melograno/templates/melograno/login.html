@@ -10,19 +10,36 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'melograno/css/login.css'%}">
     </head>
-{% block content %}
-    <div class="row"> 
-        <div class="col-md-6 lado1">
-            <img src="{% static 'melograno/images/logo.png' %}" width="267">
-            <div class="mt-5 d-flex justify-content-center">
-                <img src="{% static 'melograno/images/login.png' %}" width="500" alt="">
+    <body>
+        <div class="row"> 
+            <div class="col-md-6 lado1">
+                <img src="{% static 'melograno/images/logo.png' %}" width="267" class="logo-align">
+                <div class="mt-5 d-flex justify-content-center">
+                    <img src="{% static 'melograno/images/login.png' %}" width="550" alt="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="textos">
+                    <div class="frase1">Bem-vindo de volta!</div>
+                    <div class="frase2">Deu fome né? Você veio ao lugar certo!</div>
+                    <div class="area-inputs">
+                        <label for="email" class="label-email">Email ou telefone</label>
+                        <div>
+                            <input type="email" class="box-email" name="email" placeholder="email@gmail.com">
+                        </div>
+
+                        <label for="password" class="label-password">Senha</label>
+                        <div>
+                            <input type="password" class="box-password" name="password" placeholder=". . . . . . . ." >
+                        </div>
+                        <div class="lembrete-senha">Senha de 8 dígitos</div>
+                        <button class="button-entrar">Entrar</button>
+                       
+                    </div>
+                    <div class="final-message">
+                        <span class="msg-cadastre">Ainda não tem uma conta? <a class="msg-cadastre2" style="text-decoration:none; cursor: pointer">Cadastre-se</a></span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="textos">
-                <div class="frase1">Bem-vindo de volta!</div>
-                <div class="frase2">Deu fome né? Você veio ao lugar certo!</div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+    </body>
