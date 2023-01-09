@@ -9,3 +9,6 @@ def login(request):
 
 def home(request):
 	return render(request, 'melograno/pages/home.html')	
+
+def signup(request):
+	return render(request, 'melograno/signup.html')
