@@ -57,19 +57,9 @@
     text-align: left;   
 }
 
-input[type="name"]{ 
+.input-name, .input-email, .input-password{
     padding: 15px;
-    font-size: 18px;   
-}
-
-input[type="email"]{ 
-    padding: 15px;
-    font-size: 18px;   
-}
-
-input[type="password"]{ 
-    padding: 15px;
-    font-size: 18px;   
+    font-size: 18px; 
 }
 
 .label-name{
@@ -108,9 +98,50 @@ input[type="password"]{
     border: none;
     border-radius: 33px;
 }
-
-.small-seletor{
-    
+.group-buttons{
+    padding-bottom: 10px;
 }
 
+.radio-padding{
+    padding-right: 5%;
+}
 
+.radio-item {
+    display: inline-block;
+    position: relative;
+    padding: 0 6px;
+  }
+  
+  .radio-item input[type='radio'] {
+    display: none;
+  }
+  
+  .radio-item label {
+    color: rgba(30, 30, 30, 0.75);
+    font-weight: 600;
+  }
+  
+  .radio-item label:before {
+    content: " ";
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin: 0 5px 0 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 11px;
+    border: 2px solid rgba(255,114,94,1);
+    background-color: transparent;
+  }
+  
+  .radio-item input[type=radio]:checked + label:after {
+    border-radius: 11px;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    content: " ";
+    display: block;
+    background: rgba(255,114,94,1);
+  }
