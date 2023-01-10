@@ -6,3 +6,6 @@ def index(request):
 
 def login(request):
 	return render(request, 'melograno/login.html')	
+
+def password(request):
+	return render(request, 'melograno/password.html')	

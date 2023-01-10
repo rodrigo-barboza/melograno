@@ -17,6 +17,10 @@ html, body {
     font-family: 'Lato'; 
 }
 
+#recuperacao{
+    padding-top: 200px;
+}
+
 .frase1{
     font-size: 35px;
     font-weight: 600;
@@ -51,7 +55,7 @@ html, body {
 }
 
 input[type="email"]{ 
-    padding: 15px;
+    padding: 25px;
     font-size: 18px;
     
 }
@@ -67,7 +71,7 @@ input[type="email"]{
 
 
 input[type="password"]{ 
-    padding: 15px;
+    padding: 25px;
     font-size: 20px;
    
 }
@@ -81,7 +85,15 @@ input[type="password"]{
 
 }
 
-.button-entrar{
+.esqueceu-senha{
+    font-family: 'Lato';
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(243, 68, 68, 1);
+    padding-left: 290px;
+}
+
+.button-entrar,.button-enviar{
     margin-top: 60px;
     width: 545px;
     height: 65px;
@@ -92,6 +104,15 @@ input[type="password"]{
     font-weight: 600;
     border: none;
     border-radius: 33px;
+}
+
+.button-entrar:hover,.button-enviar:hover{
+
+    transition-delay: 100ms;
+    background-color: white;
+    color: rgba(243, 68, 68, 1);
+    border: 2px solid rgba(243, 68, 68, 1);   
+
 }
 
 .final-message{

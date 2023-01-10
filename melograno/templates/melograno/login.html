@@ -22,7 +22,7 @@
                 <div class="textos">
                     <div class="frase1">Bem-vindo de volta!</div>
                     <div class="frase2">Deu fome né? Você veio ao lugar certo!</div>
-                    <div class="area-inputs">
+                    <div class="area-inputs" id="input-recuperacao">
                         <label for="email" class="label-email">Email ou telefone</label>
                         <div>
                             <input type="email" class="box-email" name="email" placeholder="email@gmail.com">
@@ -32,7 +32,7 @@
                         <div>
                             <input type="password" class="box-password" name="password" placeholder=". . . . . . . ." >
                         </div>
-                        <div class="lembrete-senha">Senha de 8 dígitos</div>
+                        <div class="lembrete-senha">Senha de 8 dígitos <span class="esqueceu-senha"><a style="cursor: pointer; text-decoration: none; color: rgba(243, 68, 68, 1);" href="{% url 'password' %}">Esqueci a minha senha</a></span></div>
                         <button class="button-entrar">Entrar</button>
                        
                     </div>
