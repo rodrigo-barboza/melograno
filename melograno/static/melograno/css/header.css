@@ -37,12 +37,16 @@
     background-color: #F34444;
     border-radius: 37px;
     border: none;
-    color: #fff;
     width: 155px;
     height: 48px;
     font-weight: 600;
     margin-right: 30px;
     transition: .3s ease all;
+}
+
+.btn-signin a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .btn-signin:hover {
@@ -59,6 +63,11 @@
     height: 48px;
     font-weight: 600;
     transition: .3s ease all;
+}
+
+.btn-signon a {
+    text-decoration: none;
+    color: #F34444;
 }
 
 .btn-signup:hover {
