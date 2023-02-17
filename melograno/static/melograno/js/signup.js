@@ -12,9 +12,9 @@ const createPayload = () => {
     fields.forEach(field => {
         let fieldValue = document.querySelector(
             getQueryStringByType(field)
-        ).value;
+        );
 
-        payload[field] = fieldValue;
+        payload[field] = fieldValue?.value;
     });
 
     return payload;

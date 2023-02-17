@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+
 from melograno.forms import RegisterForm
+
 import json
 
 # Create your views here.
@@ -37,6 +39,6 @@ def register(request):
 		return JsonResponse({'message': 'tudo ok'})
 	
 	errors = dict(form.errors.items())
-	return JsonResponse({'errors': errors }, status=422)
+	return JsonResponse({'errors': errors }, status=406)
 
 

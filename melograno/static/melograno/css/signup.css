@@ -96,6 +96,14 @@
     border: none;
     border-radius: 33px;
 }
+
+.button-signup:hover {
+    transition-delay: 100ms;
+    background-color: white;
+    color: rgba(243, 68, 68, 1);
+    border: 2px solid rgba(243, 68, 68, 1); 
+}
+
 .group-buttons{
     padding-bottom: 10px;
 }
