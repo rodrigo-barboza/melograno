@@ -1,5 +1,4 @@
 .margin-left{
-    height: 100vh;
     padding: 40px;
     background-color: rgba(222, 222, 222, 0.38);
 }
@@ -31,7 +30,6 @@
 }
 
 .final-message{
-    width: 100vh;
     margin-top: 50px;
     margin-left: 25%;
 }
@@ -104,6 +102,14 @@
 
 .radio-padding{
     padding-right: 5%;
+}
+
+input {
+    padding: 0 10px 0 10px;
+}
+
+input::placeholder {
+    padding: 0 10px 0 10px;
 }
 
 .radio-item {
