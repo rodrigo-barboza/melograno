@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth import password_validation
 
+from .models import User
+
+
 ROLES = (
     ('client', 'Cliente'),
     ('owner', 'Proprietário')
@@ -22,7 +25,7 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError('Senha inválida')
 
         return password
-    
+
     def clean(self):
         cleaned_data = super(RegisterForm, self).clean()
         password = cleaned_data.get('password')
@@ -30,10 +33,12 @@ class RegisterForm(forms.Form):
 
         if password and confirm_password and password != confirm_password:
             raise forms.ValidationError('As senhas não correspondem')
-        
+
+        user_email = cleaned_data.get('email')
+        email_already_exists = User.objects.filter(email=user_email).exists()
+
+        if email_already_exists:
+            raise forms.ValidationError('Email já cadastrado.')
+
         return cleaned_data
 
-        # user_email = cleaned_data.get('email')
-# email_already_exists = User.objects.filter(email=user_email).exists()
-        # if email_already_exists:
-        #     raise forms.ValidationError('Email já cadastrado.')

@@ -27,13 +27,12 @@ const getQueryStringByType = (field) => {
 };
 
 const submit = () => {
-    axios.post('/register', createPayload())
+    axios.post('/guest/register', createPayload())
         .then(response => {
-            console.log(response.data);
             setAlertWithConfirmation(
                 'success',
                 {
-                    title: 'Usuário cadastrado com sucesso!',
+                    title: response.data.message,
                     text: 'Vá para página de login'
                 }
             );
@@ -79,7 +78,7 @@ const setAlertWithConfirmation = (type, { title, text }) => {
         confirmButtonColor: '#146C43',
     }).then((result) => {
         if (result) {
-            window.location.href = '/login';
+            window.location.href = 'guest/login';
         }
     });
 };

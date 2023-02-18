@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['192.168.100.120', '192.168.56.120', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'melograno',
+    'guest.apps.GuestConfig',
     'client.apps.ClientConfig',
     'owner.apps.OwnerConfig',
     'django.contrib.admin',
