@@ -78,7 +78,7 @@ const setAlertWithConfirmation = (type, { title, text }) => {
         confirmButtonColor: '#146C43',
     }).then((result) => {
         if (result) {
-            window.location.href = 'guest/login';
+            window.location.href = '/guest/login';
         }
     });
 };
