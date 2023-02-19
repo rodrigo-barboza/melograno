@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 
+from melograno.helpers.Mail import Mail
 from guest.forms import RegisterForm
 from .models import User
 
@@ -40,8 +41,14 @@ def register(request):
 				form.cleaned_data['password']
 			),
 			establishment_id=None,
-			state='active',
+			state='inactive',
 		)
+
+		Mail(
+			'Confirmação de email',
+			'Mensagem de teste e tal tal',
+			user.email
+		).send()
 
 		user.save()
 
