@@ -24,4 +24,5 @@ urlpatterns = [
     path('client/', include('client.urls')),
     path('owner/', include('owner.urls')),
     path('guest/', include('guest.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
