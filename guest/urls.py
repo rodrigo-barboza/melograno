@@ -24,4 +24,5 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('password', views.password, name='password'),
     path('home', views.home, name='home'),
+    path('', include('social_django.urls', namespace='melograno')),
 ]

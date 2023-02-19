@@ -29,7 +29,14 @@
         <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
             <div class="texts">
                 <div class="upper-text">Cadastre-se agora!</div>
-
+                
+                <a class="google-btn" href="{% url 'social:begin' 'google-oauth2' %}">
+                    <div class="google-icon-wrapper">
+                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                    </div>
+                    <p class="btn-text"><b>Cadastra-se com conta do Google</b></p>
+                </a>
+                
                 <div class="user-type-text">Tipo de Usuário</div>
 
                 <div class="group-buttons">
@@ -66,12 +73,12 @@
                 </div>
                 
                 <button class="button-signup" onclick="submit()">Cadastrar</button>
+                
                 <div class="final-message">
                     <span class="signup-message">Já tem uma conta? <a href="{% url 'login' %}" class="signup-message2" style="text-decoration:none; cursor: pointer">Entrar!</a></span>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="{% static 'guest/js/signup.js' %}"></script>
 </body>

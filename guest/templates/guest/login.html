@@ -27,6 +27,13 @@
             <div class="textos d-flex justify-content-center align-items-center flex-column">
                 <div class="frase1">Bem-vindo de volta!</div>
                 <div class="frase2">Deu fome né? Você veio ao lugar certo!</div>
+                {% if messages %}
+                    <div class="alert alert-warning mt-4" style="width: 545px;">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="area-inputs" id="input-recuperacao">
                     <label for="email" class="label-email">Email ou telefone</label>
                     <div>
@@ -42,6 +49,12 @@
                                 href="{% url 'password' %}">Esqueci a minha senha</a></span></div>
                     <button class="button-entrar">Entrar</button>
                 </div>
+                <a class="google-btn" href="{% url 'social:begin' 'google-oauth2' %}">
+                    <div class="google-icon-wrapper">
+                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                    </div>
+                    <p class="btn-text"><b>Logar com o Google</b></p>
+                </a>
                 <div class="final-message msg-cadastre"> Ainda não tem uma conta?
                     <a href="{% url 'signup' %}" class="msg-cadastre2" style="text-decoration:none; cursor: pointer">
                         Cadastre-se
