@@ -93,7 +93,8 @@ input[type="password"]{
 }
 
 .button-entrar,.button-enviar{
-    margin-top: 60px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     width: 545px;
     height: 65px;
     background-color: rgba(243, 68, 68, 1);
@@ -130,29 +131,12 @@ input[type="password"]{
 }
 
 .google-btn {
-    margin-top: 15px;
-    width: 184px;
-    height: 42px;
-    background-color: #4285f4;
-    border-radius: 2px;
+    max-width: 400px;
+    position: relative;
+    padding: 15px 20px;
+    border: solid 1px rgba(0, 0, 0, .4);
 }
 
-.google-icon-wrapper {
-    position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    background-color: #fff;
-}
-.google-icon {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-}
 .btn-text {
     float: right;
     margin: 11px 11px 0 0;

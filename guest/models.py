@@ -41,4 +41,3 @@ class User(models.Model):
     password = models.CharField(max_length=50)
     establishment_id = models.ForeignKey(Establishment, on_delete=models.CASCADE, null=True)
     state = models.CharField(choices=STATES, max_length=15)
-
