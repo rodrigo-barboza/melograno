@@ -1,17 +1,20 @@
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, logout, login as auth_login
-from social_django.models import UserSocialAuth
+from django.contrib.auth.hashers import make_password
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib import messages
+
 from social_django.models import UserSocialAuth
 
 from melograno.helpers.Mail import Mail
+
 from guest.forms import RegisterForm
+
 from .models import User
 
 import json
+
 
 def login(request):
 	if request.user.is_authenticated:
@@ -130,38 +133,3 @@ def register(request):
 	errors = dict(form.errors.items())
 
 	return JsonResponse({'errors': errors}, status=406)
-
-	user_query = UserSocialAuth.objects.filter(
-		user=request.user
-	)
-
-	if user_query.count():
-		user_query = user_query.first()
-
-		user = User.objects.filter(
-			email=user_query.uid
-		).first()
-
-		if user:
-			messages.error(request, 'Usuário já cadastrado')
-			return redirect('signup')
-
-		print('OOOOOOOOOOOOOOOOOOOOO: ',user)
-		user = User(
-			role='client', 
-			username=user_query,
-			email=user_query.uid,
-			password=None,
-			establishment_id=None,
-			state='active',
-		)
-
-		user.save()
-
-		auth_login(request, user, backend='social_core.backends.google.GoogleOAuth2')
-
-		messages.success(request, 'Usuário cadastrado com sucesso!')
-		return redirect('signup')
-	else:
-		messages.error(request, 'Erro ao cadastrar usuário')
-		return redirect('signup')
