@@ -98,7 +98,6 @@ def signup(request):
 		return redirect(f'{request.user.role}:index')
 	return render(request, 'guest/signup.html')
 
-<<<<<<< HEAD
 def establishment(request):
 	return render(request, 'guest/establishment.html')
 
@@ -109,10 +108,6 @@ def order(request):
 def products(request):
 	return render(request, 'guest/products.html')
 
-
-@require_POST
-=======
->>>>>>> f07b159528c1c877bb7aa327059bc06125f9f6a5
 @csrf_exempt
 def register(request):
 	data = json.loads(request.body)
