@@ -1,0 +1,81 @@
+body{
+    margin: 20px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: black;
+}
+.food, .drinks, .profile{
+    display: flex;
+}
+.profile{
+    margin-top: 30px;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+        
+}
+.line{
+    width: 1920.01px;
+    height: 0px;
+    left: 0px;
+    top: 172.62px;
+    border: 1.41489px solid rgba(0, 0, 0, 0.14);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.product-body {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    background-color: #F2F2F2;
+    width: 636.44px;
+    height: 220px;
+    left: 33.08px;
+    top: 744.4px;
+    border-radius: 19px;
+    padding: 10px;
+    margin: 10px;
+}
+.product-body:hover{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.249);
+}
+.product-text-description {
+    font-size: 20px;
+
+}
+.product-body-text{
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.profile-body-text{
+    padding-left: 30px;
+}
+.product-text-price {
+    font-size: medium;
+    font-size: 20px;
+    margin-top: 30px;
+}
+.product-title{
+    font-size: 25px;
+}
+.img-fluid{
+    width: 100%;
+    height: auto;
+}
+.menu{
+    margin-top: 30px;
+}
+.icon:hover{
+    background-color:  #FDDFDF;
+    border-radius: 25px;
+}

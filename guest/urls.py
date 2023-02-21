@@ -24,4 +24,7 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('password', views.password, name='password'),
     path('home', views.home, name='home'),
+    path('establishment', views.establishment, name = 'establishment'),
+    path('modalOrder', views.order, name='order'),
+    path('products', views.products, name='products')
 ]

@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>Página Estabelecimento</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'guest/css/establishment.css'%}"
+    />
+    <script src="https://unpkg.com/phosphor-icons"></script>
+  </head>
+
+  <body>
+    <header>
+      <div><img src="{% static 'guest/images/logo1.png' %}" />
+      </div>
+
+      <div style="color: #f34444; font-size: 20px">Inicio</div>
+
+      <div style="font-size: 20px">Restaurantes</div>
+
+      <div><img src="{% static 'guest/images/buscar.png' %}" /></div>
+
+      <div class="icon">
+        <img src="{% static 'guest/images/cart.svg' %}" />
+      </div>
+
+      <div class="icon">
+        <img src="{% static 'guest/images/user.svg' %}" />
+      </div>
+    </header>
+
+    <div class="line"></div>
+
+    <div><img src="{% static 'guest/images/profile cover.png' %}" /></div>
+
+    <div class="profile">
+      <div><img src="{% static 'guest/images/habibs.png' %}" /></div>
+
+      <div class="profile-body-text">
+        <h2 class="product-title">Habib's Petrolina</h2>
+
+        <p class="product-text-description">
+          Lanches ◍ 20 - 30min <br />
+          Entrega e Retirada no Local
+        </p>
+
+        <div><img src="{% static 'guest/images/rating.png' %}" /></div>
+      </div>
+    </div>
+
+    <div class="menu">
+      <h5>Lanches</h5>
+
+      <a href="Add Pedido.html" class="food">
+        <div class="product-body">
+          <div class="product-body-image">
+            <img src="{% static 'guest/images/esfirra.png' %}" />
+            
+          </div>
+
+          <div class="product-body-text">
+            <h2 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h2>
+
+            <p class="product-text-description">
+              Faça as contas e economize! Escolha 8 Bib’sfihas nos sabores de:
+              Carne, Calabresa com Mussarela ou Frango. Peça já!
+            </p>
+
+            <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-body-image">
+            <img src="{% static 'guest/images/esfirra.png' %}" />
+          </div>
+
+          <div class="product-body-text">
+            <h2 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h2>
+
+            <p class="product-text-description">
+              Faça as contas e economize! Escolha 8 Bib’sfihas nos sabores de:
+              Carne, Calabresa com Mussarela ou Frango. Peça já!
+            </p>
+
+            <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
+          </div>
+        </div>
+      </a>
+
+      <h5>Bebidas</h5>
+      <div class="drinks">
+        <div class="product-body">
+          <div class="product-body-image">
+            <img src="{% static 'guest/images/coca.png' %}" />
+          </div>
+
+          <div class="product-body-text">
+            <h2 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h2>
+            <p class="product-text-description">
+              Nesse calorzão que tal uma coquinha gelada? Peça já a sua!
+            </p>
+
+            <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
+          </div>
+        </div>
+        <div class="product-body">
+          <div class="product-body-image">
+            <img src="{% static 'guest/images/coca.png' %}" />
+          </div>
+
+          <div class="product-body-text">
+            <h2 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h2>
+            <p class="product-text-description">
+              Nesse calorzão que tal uma coquinha gelada? Peça já a sua!
+            </p>
+
+            <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -24,6 +24,16 @@ def home(request):
 def signup(request):
 	return render(request, 'guest/signup.html')
 
+def establishment(request):
+	return render(request, 'guest/establishment.html')
+
+def order(request):
+	return render(request, 'guest/modalOrder.html')
+
+
+def products(request):
+	return render(request, 'guest/products.html')
+
 
 @require_POST
 @csrf_exempt
