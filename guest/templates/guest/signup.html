@@ -29,7 +29,19 @@
         <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
             <div class="texts">
                 <div class="upper-text">Cadastre-se agora!</div>
-
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-warning mt-4" style="width: 545px;">
+                                {{ message }}
+                            </div>
+                        {% elif message.tags == 'success' %}
+                            <div class="alert alert-success mt-4" style="width: 545px;">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 <div class="user-type-text">Tipo de Usuário</div>
 
                 <div class="group-buttons">

@@ -1,66 +1,75 @@
-.margin-left{
+body {
+    overflow-x: hidden;
+}
+
+.margin-left {
     padding: 40px;
     background-color: rgba(222, 222, 222, 0.38);
 }
 
-.adjust-image{
+.adjust-image {
     margin-top: 9%;
 }
 
-.texts{
+.texts {
     padding: 90px;
-    font-family: 'Lato'; 
+    font-family: 'Lato';
 }
 
-.upper-text{
+.upper-text {
     font-size: 35px;
     font-weight: 500;
 }
 
-.user-type-text{
+.user-type-text {
     margin-top: 5%;
     margin-bottom: 3.6%;
 }
 
-.reminder-passw{
+.reminder-passw {
     margin-top: 8px;
     margin-left: 3px;
     font-size: 13px;
     font-weight: 500;
 }
 
-.final-message{
+.final-message {
     margin-top: 50px;
     margin-left: 25%;
 }
 
-.signup-message,.signup-message2{
+.signup-message,
+.signup-message2 {
     font-family: 'Lato';
     font-size: 17px;
     font-weight: 600;
 }
 
-.signup-message2{
+.signup-message2 {
     color: rgba(243, 68, 68, 1);
-    
+
 }
 
-.box-name, .box-email,.box-password{
+.box-name,
+.box-email,
+.box-password {
     margin-top: 10px;
     width: 545px;
     height: 65px;
     border-radius: 33px;
     background-color: rgba(221, 221, 221, 1);
     border: none;
-    text-align: left;   
+    text-align: left;
 }
 
-.input-name, .input-email, .input-password{
+.input-name,
+.input-email,
+.input-password {
     padding: 15px;
-    font-size: 18px; 
+    font-size: 18px;
 }
 
-.label-name{
+.label-name {
     padding-top: 20px;
     font-family: 'Lato';
     font-size: 17px;
@@ -68,7 +77,7 @@
     color: rgba(30, 30, 30, 0.75);
 }
 
-.label-email{
+.label-email {
     padding-top: 20px;
     font-family: 'Lato';
     font-size: 17px;
@@ -76,7 +85,7 @@
     color: rgba(30, 30, 30, 0.75);
 }
 
-.label-password{
+.label-password {
     padding-top: 20px;
     font-family: 'Lato';
     font-size: 17px;
@@ -84,7 +93,7 @@
     color: rgba(30, 30, 30, 0.75);
 }
 
-.button-signup{
+.button-signup {
     margin-top: 60px;
     width: 545px;
     height: 65px;
@@ -101,14 +110,14 @@
     transition-delay: 100ms;
     background-color: white;
     color: rgba(243, 68, 68, 1);
-    border: 2px solid rgba(243, 68, 68, 1); 
+    border: 2px solid rgba(243, 68, 68, 1);
 }
 
-.group-buttons{
+.group-buttons {
     padding-bottom: 10px;
 }
 
-.radio-padding{
+.radio-padding {
     padding-right: 5%;
 }
 
@@ -124,18 +133,18 @@ input::placeholder {
     display: inline-block;
     position: relative;
     padding: 0 6px;
-  }
-  
-  .radio-item input[type='radio'] {
+}
+
+.radio-item input[type='radio'] {
     display: none;
-  }
-  
-  .radio-item label {
+}
+
+.radio-item label {
     color: rgba(30, 30, 30, 0.75);
     font-weight: 600;
-  }
-  
-  .radio-item label:before {
+}
+
+.radio-item label:before {
     content: " ";
     display: inline-block;
     position: relative;
@@ -144,11 +153,11 @@ input::placeholder {
     width: 20px;
     height: 20px;
     border-radius: 11px;
-    border: 2px solid rgba(255,114,94,1);
+    border: 2px solid rgba(255, 114, 94, 1);
     background-color: transparent;
-  }
-  
-  .radio-item input[type=radio]:checked + label:after {
+}
+
+.radio-item input[type=radio]:checked+label:after {
     border-radius: 11px;
     width: 12px;
     height: 12px;
@@ -157,5 +166,12 @@ input::placeholder {
     left: 10px;
     content: " ";
     display: block;
-    background: rgba(255,114,94,1);
-  }
+    background: rgba(255, 114, 94, 1);
+}
+
+.google-btn {
+    max-width: 400px;
+    position: relative;
+    padding: 15px 20px;
+    border: solid 1px rgba(0, 0, 0, .4);
+}

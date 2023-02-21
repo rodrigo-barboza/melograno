@@ -1,0 +1,46 @@
+
+<!doctype html>
+{% load static %}
+
+<html lang="pt-br" style="height: 100vh;">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" type="image/x-icon" href="{% static 'guest/images/favicon.png' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="{% static 'guest/css/header.css' %}" rel="stylesheet">
+    <link href="{% static 'guest/css/landing-page-section.css' %}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <title>Melograno - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <navbar class="d-flex justify-content-between px-4 melograno-navbar">
+        <div id="logo" class="logo-align">
+            <img src="{% static 'guest/images/logo.png' %}" width="267">
+        </div>
+        <div id="navbar" class="navbar-items">
+            <a href="" class="menu-item active">Início</a>
+            <a href="" class="menu-item">Restaurantes</a>
+            <a href="" class="menu-item">Bebidas</a>
+        </div>
+        <div id="buttons" class="logo-align">
+             <a href="{% url 'user_logout' %}" style="text-decoration: none; color: rgba(243, 243, 245, 1)"><button class="btn-signin">Sair</button></a>
+        </div>
+    </navbar>
+
+    <section class="container">
+        {% block content %}
+
+        {% endblock %}
+    </section>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>
