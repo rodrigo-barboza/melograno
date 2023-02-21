@@ -28,4 +28,5 @@ urlpatterns = [
     path('auth/logout', views.user_logout, name='user_logout'),
     path('password', views.password, name='password'),
     path('home', views.home, name='home'),
+    path('', include('social_django.urls', namespace='melograno')),
 ]

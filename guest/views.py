@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, logout, login as auth_login
 from social_django.models import UserSocialAuth
 from django.http import JsonResponse
+from social_django.models import UserSocialAuth
 
 from melograno.helpers.Mail import Mail
 from guest.forms import RegisterForm
