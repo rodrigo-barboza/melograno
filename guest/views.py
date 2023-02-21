@@ -107,7 +107,6 @@ def establishment(request):
 def order(request):
 	return render(request, 'guest/modalOrder.html')
 
-
 def products(request):
 	return render(request, 'guest/products.html')
 
