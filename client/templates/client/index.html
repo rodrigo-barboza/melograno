@@ -1,4 +1,4 @@
-{% extends 'guest/layouts/base.html' %}
+{% extends 'client/layouts/base.html' %}
 {% load static %}
 
 {% block title %} Peça agora! {% endblock %}
@@ -6,5 +6,11 @@
 {% block content %}
     <div>
         Cliente
+
+        olá, {{ request.user }}
+        <br><br>
+        {% if  social_user %}
+            Url: {{ social_user.uid }}
+        {% endif %}
     </div>
 {% endblock %}

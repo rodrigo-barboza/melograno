@@ -29,7 +29,19 @@
         <div class="col-md-6 d-flex justify-content-center align-items-center flex-column">
             <div class="texts">
                 <div class="upper-text">Cadastre-se agora!</div>
-
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-warning mt-4" style="width: 545px;">
+                                {{ message }}
+                            </div>
+                        {% elif message.tags == 'success' %}
+                            <div class="alert alert-success mt-4" style="width: 545px;">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 <div class="user-type-text">Tipo de Usuário</div>
 
                 <div class="group-buttons">
@@ -46,7 +58,7 @@
 
                 <label for="name" class="label-name">Nome</label>
                 <div>
-                    <input type="name" class="box-name input-name" name="name" >
+                    <input type="name" class="box-name input-name" name="name" placeholder="Rodrigo Lindo">
                 </div>
 
                 <label for="email" class="label-email">Email</label>
@@ -66,12 +78,12 @@
                 </div>
                 
                 <button class="button-signup" onclick="submit()">Cadastrar</button>
+                
                 <div class="final-message">
                     <span class="signup-message">Já tem uma conta? <a href="{% url 'login' %}" class="signup-message2" style="text-decoration:none; cursor: pointer">Entrar!</a></span>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="{% static 'guest/js/signup.js' %}"></script>
 </body>
