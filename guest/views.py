@@ -24,6 +24,11 @@ def home(request):
 def signup(request):
 	return render(request, 'guest/signup.html')
 
+def category(request):
+	return render(request, 'client/category.html')
+
+def carrinho(request):
+	return render(request, 'client/carrinho.html')	
 
 @require_POST
 @csrf_exempt

@@ -1,0 +1,135 @@
+.carrinho{
+    display: none;
+    transition: 1s;
+    position: absolute;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.4);
+    right: 0;
+    top: 7.4rem;
+    width: 30%;
+    height: auto;
+    background-color: white;
+}
+
+.carrinho-components{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem;
+}
+
+.title-carrinho{
+    font-family: 'Lato';
+    font-size: 38px;
+    font-weight: 500;
+    color: rgba(30, 30, 30, 1);
+}
+
+.tipo-carrinho, .entrega-carrinho{
+    font-family: 'Lato';
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(30, 30, 30, 1);
+}
+
+.line-top-carrinho{
+    width: 100%;
+    height: 0px;
+    left: 0px;
+    
+    border: 1.41489px solid rgba(0, 0, 0, 0.14);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.line-down-carrinho{
+    width: 100%;
+    height: 0px;
+    left: 0px;
+    border: 1.41489px solid rgba(0, 0, 0, 0.14);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.qtd-estrelas{
+    font-family: 'Lato';
+    font-size: 23px;
+    font-weight: bold;
+    color: #FEAC3E;
+}
+
+.produtos{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-carrinho{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Lato';
+    font-size: 17px;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    color: rgba(30, 30, 30, 1);
+}
+
+
+.valor{
+    margin-left: 7.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+}
+
+
+.descricao{
+    display: flex;
+    align-items: center;
+}
+
+.area-subtotal,.area-entrega{
+    padding-left: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Lato';
+    font-size: 17px;
+    font-weight: 400;
+    padding-bottom: 1rem;
+    color: rgba(30, 30, 30, 0.73);
+}
+
+.valor-entrega, .valor-subtotal{
+    margin-right: 1rem;
+    font-size: 21px;
+    
+}
+
+.area-total{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Lato';
+    font-size: 26px;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    padding-top: 3rem;
+    color: rgba(30, 30, 30, 1)
+}
+
+.botao-pagamento{
+    margin: 0 auto;
+    margin-top: 3rem;
+    width: 280px;
+    height: 70px;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: 700;
+    background-color: rgba(243, 68, 68, 1);
+    color: white;
+    border: none;
+    border-radius: 14px;
+}
