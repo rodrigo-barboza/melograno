@@ -12,4 +12,5 @@ client_required = user_passes_test(is_client, login_url='/guest/login')
 
 urlpatterns = [
 	path('', client_required(views.index), name='index'),
+	path('establishment', client_required(views.establishment), name='establishment'),
 ]

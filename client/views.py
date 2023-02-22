@@ -3,7 +3,9 @@ from django.contrib import messages
 from social_django.models import UserSocialAuth
 from guest.models import User
 
-# Create your views here.
+def establishment(request):
+	return render(request, 'client/pages/establishment.html')
+
 def index(request):
 	context = {}
 
@@ -16,14 +18,12 @@ def index(request):
 
 	return render(request, 'client/index.html', context)
 
-
 def is_social_user(request_user):
 	has_user = UserSocialAuth.objects.filter(
 		user=request_user
 	).exists()
 
 	return True if has_user else False
-
 
 def user_already_registered(request):
 	user_query = UserSocialAuth.objects.filter(
@@ -40,7 +40,6 @@ def user_already_registered(request):
 		return has_user
 
 	return False
-
 
 def register_with_google(request):
 	user_query = UserSocialAuth.objects.filter(

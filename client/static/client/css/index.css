@@ -1,0 +1,46 @@
+.melograno-navbar {
+    font-family: 'Lato'; 
+    font-weight: 400; 
+    font-size: 20px;
+    margin-top: 50px;
+    margin-inline: 30px;
+}
+
+.nav-links a {
+    margin-right: 55px;
+}
+
+.logo-align-y {
+    margin-top: -20px;
+}
+
+#search {
+    margin-top: -10px;
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 0px 4px 2px 4px;
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+.custom-input {
+    padding-left: 50px;
+    height: 40px;
+    width: 350px;
+    font-size: 14px;
+}
+
+.custom-input:focus {
+    color: #1E1E1E;
+}
+
+.custom-input:focus {
+    border: 0 none;
+    outline: 0;
+}

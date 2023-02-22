@@ -27,8 +27,6 @@ urlpatterns = [
     path('auth/login/google', views.user_google_login, name='user_google_login'),
     path('auth/logout', views.user_logout, name='user_logout'),
     path('password', views.password, name='password'),
-    path('home', views.home, name='home'),
-    path('establishment', views.establishment, name = 'establishment'),
     path('modalOrder', views.order, name='order'),
     path('products', views.products, name='products'),
 ]

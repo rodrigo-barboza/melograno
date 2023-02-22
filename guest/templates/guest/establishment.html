@@ -1,48 +1,28 @@
+{% extends 'guest/layouts/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
+{% block title %} Peça agora! {% endblock %}
 
-    <title>Página Estabelecimento</title>
+{% block content %}
+  <!-- <header>
+    <div><img src="{% static 'guest/images/logo1.png' %}" />
+    </div>
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'guest/css/establishment.css'%}"
-    />
-    <script src="https://unpkg.com/phosphor-icons"></script>
-  </head>
+    <div style="color: #f34444; font-size: 20px">Inicio</div>
 
-  <body>
-    <header>
-      <div><img src="{% static 'guest/images/logo1.png' %}" />
-      </div>
+    <div style="font-size: 20px">Restaurantes</div>
 
-      <div style="color: #f34444; font-size: 20px">Inicio</div>
+    <div><img src="{% static 'guest/images/buscar.png' %}" /></div>
 
-      <div style="font-size: 20px">Restaurantes</div>
+    <div class="icon">
+      <img src="{% static 'guest/images/cart.svg' %}" />
+    </div>
 
-      <div><img src="{% static 'guest/images/buscar.png' %}" /></div>
-
-      <div class="icon">
-        <img src="{% static 'guest/images/cart.svg' %}" />
-      </div>
-
-      <div class="icon">
-        <img src="{% static 'guest/images/user.svg' %}" />
-      </div>
-    </header>
+    <div class="icon">
+      <img src="{% static 'guest/images/user.svg' %}" />
+    </div>
+  </header> -->
+  <div class="container">
 
     <div class="line"></div>
 
@@ -70,7 +50,7 @@
         <div class="product-body">
           <div class="product-body-image">
             <img src="{% static 'guest/images/esfirra.png' %}" />
-            
+
           </div>
 
           <div class="product-body-text">
@@ -134,5 +114,5 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+{% endblock %}

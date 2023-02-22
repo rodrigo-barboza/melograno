@@ -20,7 +20,7 @@ def login(request):
 	if request.user.is_authenticated:
 		return redirect(f'{request.user.role}:index')
 
-	return render(request, 'guest/login.html')	
+	return render(request, 'guest/pages/login.html')	
 
 def user_logout(request):
 	logout(request)
@@ -99,10 +99,7 @@ def home(request):
 def signup(request):
 	if request.user.is_authenticated:
 		return redirect(f'{request.user.role}:index')
-	return render(request, 'guest/signup.html')
-
-def establishment(request):
-	return render(request, 'guest/establishment.html')
+	return render(request, 'guest/pages/signup.html')
 
 def order(request):
 	return render(request, 'guest/modalOrder.html')
