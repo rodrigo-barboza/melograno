@@ -111,7 +111,6 @@ input[type="password"] {
 
 .button-entrar:hover,
 .button-enviar:hover {
-
     transition-delay: 100ms;
     background-color: white;
     color: rgba(243, 68, 68, 1);

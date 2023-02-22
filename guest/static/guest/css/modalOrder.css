@@ -1,0 +1,36 @@
+.modal-body{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.modal-header{
+    border-bottom: 0px;
+}
+.modal-content{
+    
+        width: 829px;
+            height: 500px;
+}
+.modal-text-description{
+ margin-top: 30px;
+ margin-bottom: 30px;
+ font-size: 20px;
+}
+.modal-text-price{
+    font-size: medium;
+    margin-top: 100px;
+    font-size: 25px;
+}
+.btn-primary{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    font-size: 22px;
+}
+.modal-dialog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
