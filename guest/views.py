@@ -90,8 +90,8 @@ def redirect_by_role(user):
 	if user.role == 'owner':
 		return 'owner:index'
 
-def password(request):
-	return render(request, 'guest/password.html')	
+def password_reset(request):
+	return render(request, 'guest/password_reset.html')	
 
 def home(request):
 	return render(request, 'guest/pages/home.html')	
