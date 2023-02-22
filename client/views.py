@@ -6,6 +6,9 @@ from guest.models import User
 def establishment(request):
 	return render(request, 'client/pages/establishment.html')
 
+def category(request):
+	return render(request, 'client/pages/category.html')
+
 def index(request):
 	context = {}
 
