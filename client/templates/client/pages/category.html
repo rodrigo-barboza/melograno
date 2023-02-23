@@ -1,76 +1,36 @@
 {% extends 'client/layouts/base.html' %}
 {% load static %}
 
-{% block title %} Estabelecimentos de Comida Mexicana {% endblock %}
+{% block title %} Estabelecimentos de Comida {{ category }} {% endblock %}
 
 {% block content %}
 <link href="{% static 'client/css/category.css' %}" rel="stylesheet">
 
 <div class="title-area">
-    <span class="title">Comida Mexicana</span>
     <img src="{% static 'client/images/banner-mexican.png' %}">
     <div class="line-down"></div>
 </div>
 
 <div class="products-area">
-    <span class="title">Estabelecimentos de Comida Mexicana</span>
+    <span class="title">Estabelecimentos de Comida {{ category }}</span>
     <div class="grid">
-        <a class="item" href="{% url 'client:establishment' %}">
-            <img src="{% static 'client/images/logo-habibs.png' %}" alt="">
-            <div class="text-area">
-                <p class="nome-estabelecimento">Habib's Petrolina </p>
-                <p class="time">Lanches ◍ 20 - 30min</p>
-                <div class="estrelas">
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
+        {% for establishment in establishments %}
+            <a class="item" href="{% url 'client:establishment' establishment.establishment_id %}">
+                <div class="image-container" style="background-image: url({{ establishment.image }})"></div>
+                <div class="text-area">
+                    <p class="nome-estabelecimento">{{ establishment.name }} </p>
+                    <p class="time">Tempo médio ◍ {{ establishment.avg_time }}</p>
+                    <div class="estrelas">
+                        {% for it in establishment.rate %}
+                            <i id="{{ it }}" class="fa fa-star" style="font-size:20px; color: #FEAC3E"></i>
+                        {% endfor %}
+                        {% for it in establishment.outline %}
+                            <i id="{{ it }}" class="fa fa-star" style="font-size:20px;"></i>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-        </a>
-        <a class="item" href="{% url 'client:establishment' %}">
-            <img src="{% static 'client/images/logo-bar-gordo.png' %}" alt="">
-            <div class="text-area">
-                <p class="nome-estabelecimento">Bar do Gordo </p>
-                <p class="time">Bebidas ◍ 20 - 30min</p>
-                <div class="estrelas">
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                </div>
-            </div>
-        </a>
-        <a class="item" href="{% url 'client:establishment' %}">
-            <img src="{% static 'client/images/logo-mcdonalds.png' %}" alt="">
-            <div class="text-area">
-                <p class="nome-estabelecimento">McDonald's </p>
-                <p class="time">Lanches ◍ 20 - 30min</p>
-                <div class="estrelas">
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                </div>
-            </div>
-        </a>
-        <a class="item" href="{% url 'client:establishment' %}">
-            <img src="{% static 'client/images/logo-bar-tripa.png' %}" alt="">
-            <div class="text-area">
-                <p class="nome-estabelecimento">Bar da tripa </p>
-                <p class="time">Bebidas ◍ 20 - 30min</p>
-                <div class="estrelas">
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                </div>
-            </div>
-        </a>
+            </a>
+        {% endfor %}
     </div>
 </div>
 
