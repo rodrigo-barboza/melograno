@@ -1,10 +1,71 @@
-{% extends 'client/layouts/base.html' %}
-{% load static %}
+{% extends 'client/layouts/base.html' %} {% load static %} {% block title %}
+Peça agora! {% endblock %} {% block content %}
+<link href="{% static 'client/css/profile.css' %}" rel="stylesheet" />
 
-{% block title %} Peça agora! {% endblock %}
+<div class="my-profile">Meu Perfil</div>
 
-{% block content %}
+<div class="client-info">
+  <div class="client-text-description">
+    <div class="client-name">Francisco Luan Ramos</div>
+    <div class="client-adress">
+      Travessa São Miguel, apto 3a, SantoAntônio - Juazeiro, BA
+    </div>
+    <div class="client-form">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" />
+      </div>
 
-    CONTEÚDO AQUI!
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="meuemail@exemplo.com"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="inputPassword" class="col-sm-2 col-form-label"
+          >Password</label
+        >
+
+        <input type="password" class="form-control" id="inputPassword" />
+      </div>
+    </div>
+
+    <div class="address">
+      <div class="address-title">Endereço</div>
+
+      <div class="adress-form">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Rua</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Bairro</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="inputPassword" class="col-sm-2 col-form-label"
+            >Número</label>
+          <input type="number" class="form-control" id="inputPassword" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <img src="{% static 'client/images/client-profile-icon.png' %}" />
+</div>
 
 {% endblock %}
