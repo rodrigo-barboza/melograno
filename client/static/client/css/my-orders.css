@@ -18,6 +18,13 @@ a:hover {
     color: white;
 }
 
+.below-navbar{
+    padding-top: 5vh;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f24443;
+}
+
 .blank-space{
     padding-bottom: 5vh;
 }
@@ -57,7 +64,7 @@ a:hover {
     padding-right: 5%;
 }
 
-.empty_state{
+.empty_state, .below-navbar{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,5 +76,6 @@ a:hover {
     font-weight: 500;
 }
 
-
-
+.page_link:hover{
+    color: blue;    
+}
