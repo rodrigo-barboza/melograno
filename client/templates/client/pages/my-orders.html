@@ -4,7 +4,52 @@
 {% block title %} Peça agora! {% endblock %}
 
 {% block content %}
+    <link href="{% static 'client/css/my-orders.css' %}" rel="stylesheet">
+    <nav class="navbar navbar-light" style="background-color: #f24443;">
+        <a class="navbar-brand">
+          <div class="sub-navbar">Meus Pedidos</div>
+        </a>
+    </nav>
 
-    CONTEÚDO AQUI!
+    <div class="blank-space"></div>
+
+    <!-- for item in meus pedidos: -->
+    <div class="grid order_section">
+        {% for order in order_list %}
+        <div class="card w-25">
+            <div class="card-body">
+              <h5 class="card-title">{{order.plate_id.establishment_id.name}}</h5>
+              <p class="card-text adress-txt">{{order.address_id.street}}, {{order.address_id.district}}</p>
+              <hr>
+              <!-- for item in ORDER: Div Flex Start order_name flex end order_price -->
+              <!-- Fazer outro elemento no DICIONÁRIO do request e pegar por lá -->
+              <div class="grid">
+                <p class="item">item.name</p>
+                <p class="price">item.price</p>
+              </div>
+              <!-- <div class="grid"> EXEMPLO
+                <p class="item">Batatinha Frita Show de bola</p>
+                <p class="price">13,80</p>
+              </div>-->
+              <hr>
+              <!-- Aqui embaixo vai o preço, taxa de entrega e total -->
+              <div class="grid">
+                <p class="item">Total dos pedidos</p>
+                <p class="price">28,70</p>
+              </div>
+              <div class="grid">
+                <p class="item">Taxa de Entrega</p>
+                <p class="price">1,00</p>
+              </div>
+              <div class="grid">
+                <p class="item-total">Total</p>
+                <p class="price-total">29,70</p>
+              </div>
+              <a href="#" class="btn evaluate">Avaliar 🟊</a>
+            </div>
+        </div>
+        {% endfor %}        
+    </div>
+
 
 {% endblock %}

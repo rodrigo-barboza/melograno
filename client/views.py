@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.contrib import messages
 from social_django.models import UserSocialAuth
-from guest.models import User
+from guest.models import User, Order
 
 def establishment(request):
 	return render(request, 'client/pages/establishment.html')
 
-
 def my_orders(request):
-	return render(request, 'client/pages/my-orders.html')
+	user_id = request.user.user_id
+	order_list = Order.objects.filter(user_id=user_id).all()
+	return render(request, 'client/pages/my-orders.html', {'order_list': order_list, })
 
 def profile(request):
 	return render(request, 'client/pages/profile.html')

@@ -1,0 +1,58 @@
+body {
+    margin: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+.sub-navbar{
+    padding-left: 5vh;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+}
+
+.blank-space{
+    padding-bottom: 5vh;
+}
+
+.evaluate{
+    background-color: #f24443;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.adress-txt{
+    font-size: 14px;
+}
+
+.grid{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.item, .item-total{
+    font-size: 16px;
+}
+
+.price, .price-total{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.item-total, .price-total{
+    color: #f24443;
+}
+
+.order_section{
+    padding-left: 5%;
+    padding-right: 5%;
+}
