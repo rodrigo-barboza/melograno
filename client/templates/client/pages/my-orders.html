@@ -1,5 +1,6 @@
 {% extends 'client/layouts/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} Peça agora! {% endblock %}
 
@@ -21,13 +22,16 @@
             <div class="card-body">
               <h5 class="card-title">{{order.plate_id.establishment_id.name}}</h5>
               <p class="card-text adress-txt">{{order.address_id.street}}, {{order.address_id.district}}</p>
+              <p class="card-text adress-txt">{{order.send_time|naturaltime}}</p>
               <hr>
               <!-- for item in ORDER: Div Flex Start order_name flex end order_price -->
               <!-- Fazer outro elemento no DICIONÁRIO do request e pegar por lá -->
+              {% for plates in order.plates %}
               <div class="grid">
-                <p class="item">item.name</p>
-                <p class="price">item.price</p>
+                <p class="item">{{plates.name}}</p>
+                <p class="price">{{plates.price}}</p>
               </div>
+              {% endfor %}
               <!-- <div class="grid"> EXEMPLO
                 <p class="item">Batatinha Frita Show de bola</p>
                 <p class="price">13,80</p>
@@ -36,15 +40,15 @@
               <!-- Aqui embaixo vai o preço, taxa de entrega e total -->
               <div class="grid">
                 <p class="item">Total dos pedidos</p>
-                <p class="price">28,70</p>
+                <p class="price">{{order.price}}</p>
               </div>
               <div class="grid">
                 <p class="item">Taxa de Entrega</p>
-                <p class="price">1,00</p>
+                <p class="price">5,00</p>
               </div>
               <div class="grid">
                 <p class="item-total">Total</p>
-                <p class="price-total">29,70</p>
+                <p class="price-total">{{order.price}} + 5</p>
               </div>
               <a href="#" class="btn evaluate">Avaliar 🟊</a>
             </div>

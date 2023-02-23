@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from social_django.models import UserSocialAuth
-from guest.models import User, Order
+from guest.models import User, Order, Plate
 
 def establishment(request):
 	return render(request, 'client/pages/establishment.html')
@@ -9,7 +9,10 @@ def establishment(request):
 def my_orders(request):
 	user_id = request.user.user_id
 	order_list = Order.objects.filter(user_id=user_id).all()
-	return render(request, 'client/pages/my-orders.html', {'order_list': order_list, })
+	dict = {'order_list': order_list}
+	for order in order_list:
+		order.plates = Plate.objects.filter(order_id = order.order_id).all()
+	return render(request, 'client/pages/my-orders.html', dict)
 
 def profile(request):
 	return render(request, 'client/pages/profile.html')
