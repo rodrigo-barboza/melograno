@@ -12,8 +12,8 @@ client_required = user_passes_test(is_client, login_url='/guest/login')
 
 urlpatterns = [
 	path('', client_required(views.index), name='index'),
-	path('establishment', client_required(views.establishment), name='establishment'),
+	path('establishment/<int:establishment_id>', client_required(views.establishment), name='establishment'),
 	path('my-orders', client_required(views.my_orders), name='my_orders'),
 	path('profile', client_required(views.profile), name='profile'),
-	path('category', client_required(views.category), name='category'),
+	path('category/<str:category>', client_required(views.category), name='category'),
 ]

@@ -29,7 +29,6 @@ urlpatterns = [
     path('auth/login', views.user_login, name='user_login'),
     path('auth/login/google', views.user_google_login, name='user_google_login'),
     path('auth/logout', views.user_logout, name='user_logout'),
-    path('', include('social_django.urls', namespace='melograno')),
 
     # rotas de recuperação de senha    
     path('password_reset', views.password_reset, name='password_reset'),
@@ -37,4 +36,5 @@ urlpatterns = [
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="guest/password_reset_sent.html"), name="password_reset_done"),
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name="guest/new_password.html"), name="password_reset_confirm"),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="guest/password_reset_complete.html"), name="password_reset_complete"),
+    path('profile', views.profile, name='profile'),
 ]

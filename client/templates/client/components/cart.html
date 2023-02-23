@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'client/css/cart.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/0b732b284f.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
-    <div class="carrinho">
-        <div class="carrinho-components">
-            <p class="title-carrinho">Habib's Petrolina</p>
-            <p class="tipo-carrinho"><i class="fa-solid fa-cookie-bite"></i>  Lanches ◍ 20 - 30min</p>
-            <p class="entrega-carrinho"><i class="fa-solid fa-bicycle" style="font-size:20px;"></i>          Entrega e retirada no local</p>
-            <div class="estrelas">
-                <i class="fa fa-star" style="font-size:25px;"></i>
-                <i class="fa fa-star" style="font-size:25px;"></i>
-                <i class="fa fa-star" style="font-size:25px;"></i>
-                <i class="fa fa-star" style="font-size:25px;"></i>
-                <i class="fa fa-star" style="font-size:25px;"></i>
-                <span class="qtd-estrelas">4.0</span>
-            </div>
-            <div class="line-top-carrinho"></div>
+<link href="{% static 'client/css/cart.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/0b732b284f.js" crossorigin="anonymous"></script>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Carrinho</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <div class="carrinho-components">
+                <p class="title-carrinho">Habib's Petrolina</p>
+                <p class="tipo-carrinho"><i class="fa-solid fa-cookie-bite"></i> Lanches ◍ 20 - 30min</p>
+                <p class="entrega-carrinho"><i class="fa-solid fa-bicycle" style="font-size:20px;"></i> Entrega e retirada no
+                    local</p>
+                <div class="estrelas">
+                    <i class="fa fa-star" style="font-size:25px;"></i>
+                    <i class="fa fa-star" style="font-size:25px;"></i>
+                    <i class="fa fa-star" style="font-size:25px;"></i>
+                    <i class="fa fa-star" style="font-size:25px;"></i>
+                    <i class="fa fa-star" style="font-size:25px;"></i>
+                    <span class="qtd-estrelas">4.0</span>
+                </div>
+                <div class="line-top-carrinho"></div>
                 <div class="produtos">
                     <div class="item-carrinho">
                         <span class="descricao">8 BIB'SFIHAS CLÁSSICAS</span>
@@ -36,21 +35,21 @@
                         <span class="valor">R$ 8,90</span>
                     </div>
                 </div>
-            <div class="line-down-carrinho"></div>
-            <div class="area-subtotal">
-                <span class="subtotal">Subtotal</span>
-                <span class="valor-subtotal">R$ 28,80</span>
+                <div class="line-down-carrinho"></div>
+                <div class="area-subtotal">
+                    <span class="subtotal">Subtotal</span>
+                    <span class="valor-subtotal">R$ 28,80</span>
+                </div>
+                <div class="area-entrega">
+                    <span class="entrega">Taxa de entrega</span>
+                    <span class="valor-entrega">R$ 8,90</span>
+                </div>
+                <div class="area-total">
+                    <span class="total">Total</span>
+                    <span class="valor-total">R$ 35,80</span>
+                </div>
+                <button class="botao-pagamento">Pagamento</button>
             </div>
-            <div class="area-entrega">
-                <span class="entrega">Taxa de entrega</span>
-                <span class="valor-entrega">R$ 8,90</span>
-            </div>
-            <div class="area-total">
-                <span class="total">Total</span>
-                <span class="valor-total">R$ 35,80</span>
-            </div>
-            <button class="botao-pagamento">Pagamento</button>
         </div>
     </div>
-</body>
-</html>
+</div>
