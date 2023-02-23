@@ -59,7 +59,7 @@
     flex-direction: row;
     align-items: center;
     padding-left: 1rem;
-    width: 400px;
+    width: 450px;
     height: 180px;
     border-radius: 30px;
     background-color: #F2F2F2;
@@ -91,3 +91,11 @@
 .nome-estabelecimento{
     font-weight: bold;
 }
+
+.image-container {
+    width: 143px;
+    height: 143px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+  }
