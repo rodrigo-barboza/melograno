@@ -29,7 +29,7 @@
             <img src="{% static 'guest/images/logo.png' %}" width="267">
         </div>
         <div id="navbar" class="navbar-items nav-links">
-            <a href="" class="menu-item active">Início</a>
+            <a href="{% url 'client:index' %}" class="menu-item active">Início</a>
             <a href="" class="menu-item">Restaurantes</a>
             <a href="" class="menu-item">Bebidas</a>
         </div>
@@ -49,8 +49,8 @@
                 <img src="{% static 'guest/images/user.svg' %}" />
             </div>
             <ul class="dropdown-menu" aria-labelledby="drop-down-user" style="transition: .5 ease all;">
-                <li><a class="dropdown-item" href="#">Meus pedidos</a></li>
-                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li><a class="dropdown-item" href="{% url 'client:my_orders' %}">Meus pedidos</a></li>
+                <li><a class="dropdown-item" href="{% url 'client:profile' %}">Perfil</a></li>
                 <li><a class="dropdown-item" href="{% url 'user_logout' %}">Sair</a></li>
             </ul>
         </div>
@@ -70,8 +70,8 @@
                 <img src="{% static 'guest/images/favicon.png' %}" width="50">
             </div>
             <div>
-                © Copyright 2021 - iFood - Todos os direitos reservados iFood com Agência de Restaurantes Online S.A.<br/>
-                CNPJ 14.380.200/0001-21 / Avenida dos Autonomistas, nº 1496, Vila Yara, Osasco/SP - CEP 06.020-902
+                © Copyright 2023 - Melograno - Todos os direitos reservados Melograno com Agência de Restaurantes Online R.A<br/>
+                CNPJ 00.000.000/0000-00 / Avenida dos Calvos, nº 666, Vila Konoha, Disney/BR - CEP 55.555-555
             </div>
         </div> 
     </footer>
@@ -87,9 +87,7 @@
 
     dropDownBtn.addEventListener('click', () => {
         setTimeout(() => {
-            console.log('oin');
             if (dropDown.classList.contains('show')) {
-                console.log('tem');
                 dropDown.style.marginTop = '-5px';
             }
         }, 50)
