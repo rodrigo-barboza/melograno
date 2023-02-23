@@ -50,3 +50,53 @@
     object-fit: cover;
     border-radius: 30px;
 }
+
+.grid {
+    margin-top: 2rem;
+    margin-left: 3rem;
+	display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px;
+    justify-content: start;
+    grid-gap: 50px 270px;
+}
+
+
+.item{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1rem;
+    width: 400px;
+    height: 180px;
+    border-radius: 30px;
+    background-color: #F2F2F2;
+    text-decoration: none; 
+    color: #212529
+}
+
+.item:hover {
+    color: #16191b
+}
+
+.item img{
+    width: 143px;
+    height: 143px;
+}
+
+.text-area{
+    font-size: 20px;
+    font-family: 'Lato';
+    font-weight: 300;
+    margin-left: 1rem;
+    margin-bottom: 1.8rem;
+}
+
+.estrelas i{
+    color: rgba(30, 30, 30, 0.5);
+}
+
+.nome-estabelecimento{
+    font-weight: bold;
+}

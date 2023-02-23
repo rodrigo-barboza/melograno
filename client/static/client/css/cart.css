@@ -1,3 +1,10 @@
+.offcanvas{
+    width: 491px;
+}
+
+
+
+
 .carrinho{
     display: none;
     z-index: 1000;
