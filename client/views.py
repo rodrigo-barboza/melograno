@@ -2,9 +2,14 @@ from django.shortcuts import render
 from django.contrib import messages
 from social_django.models import UserSocialAuth
 from guest.models import User, Establishment
+import random
 
-def establishment(request):
-	return render(request, 'client/pages/establishment.html')
+def establishment(request, establishment_id):
+	context = {}
+
+	context['establishment'] = establishment_id
+
+	return render(request, 'client/pages/establishment.html', context)
 
 def my_orders(request):
 	return render(request, 'client/pages/my-orders.html')
@@ -12,8 +17,22 @@ def my_orders(request):
 def profile(request):
 	return render(request, 'client/pages/profile.html')
 
-def category(request):
-	return render(request, 'client/pages/category.html')
+def category(request, category):
+	context = {}
+	
+	categories = {
+		'mexican': 'Mexicana',
+		'brazilian': 'Brasileira',
+    	'healthy': 'Saudável',
+    	'japanese': 'Japonesa',
+    	'italian': 'Italiana',
+	}
+
+	context['category'] = categories[category]
+	context['establishments'] = get_establishments_by_category(category)
+	context['establishments'] = get_fancy_establishments(context['establishments'])
+
+	return render(request, 'client/pages/category.html', context)
 
 def index(request):
 	context = {}
@@ -31,6 +50,20 @@ def index(request):
 
 def get_all_establishments():
 	return Establishment.objects.all()
+
+def get_establishments_by_category(category):
+	return Establishment.objects.filter(categories=category).all()
+
+def get_fancy_establishments(establishments):
+	avg_time = ['20min', '30min', '40min', '50min', '60min']
+
+	for establishment in establishments:
+		establishment.avg_time = random.choice(avg_time)
+		establishment.name = establishment.name.title()
+		establishment.outline = range(5 - establishment.rate)
+		establishment.rate = range(establishment.rate)
+
+	return establishments
 
 def is_social_user(request_user):
 	has_user = UserSocialAuth.objects.filter(
