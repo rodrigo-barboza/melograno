@@ -4,6 +4,8 @@
 {% block title %} Peça agora! {% endblock %}
 
 {% block content %}
+{% include 'client/components/order-modal.html' %}
+
 <link href="{% static 'client/css/establishment.css' %}" rel="stylesheet">
 
 <div class="d-flex justify-content-between">
@@ -28,8 +30,8 @@
 <div class="menu">
     <h5>Lanches</h5>
 
-    <a href="#" class="food">
-        <div class="product-body">
+    <div class="food">
+        <div class="product-body" data-bs-toggle="modal" data-bs-target="#plate-modal">
             <div class="product-body-image">
                 <img src="{% static 'guest/images/esfirra.png' %}" />
 
@@ -46,7 +48,7 @@
                 <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
             </div>
         </div>
-        <div class="product-body">
+        <div class="product-body" data-bs-toggle="modal" data-bs-target="#plate-modal">
             <div class="product-body-image">
                 <img src="{% static 'guest/images/esfirra.png' %}" />
             </div>
@@ -62,11 +64,11 @@
                 <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
             </div>
         </div>
-    </a>
+    </div>
 
     <h5>Bebidas</h5>
     <div class="drinks">
-        <div class="product-body">
+        <div class="product-body" data-bs-toggle="modal" data-bs-target="#plate-modal">
             <div class="product-body-image">
                 <img src="{% static 'guest/images/esfirra.png' %}" />
 
@@ -83,7 +85,7 @@
                 <h6 class="product-text-price" style="color: #00d22e">R$ 19,90</h6>
             </div>
         </div>
-        <div class="product-body">
+        <div class="product-body" data-bs-toggle="modal" data-bs-target="#plate-modal">
             <div class="product-body-image">
                 <img src="{% static 'guest/images/esfirra.png' %}" />
 

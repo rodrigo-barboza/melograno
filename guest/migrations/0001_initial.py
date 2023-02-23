@@ -19,8 +19,6 @@ class Migration(migrations.Migration):
                 ('street', models.CharField(max_length=100)),
                 ('district', models.CharField(max_length=100)),
                 ('number', models.IntegerField()),
-                ('lat', models.CharField(max_length=10)),
-                ('lng', models.CharField(max_length=10)),
             ],
         ),
         migrations.CreateModel(
@@ -32,7 +30,8 @@ class Migration(migrations.Migration):
                 ('rate', models.FloatField(default=0.0)),
                 ('categories', models.CharField(max_length=255)),
                 ('delivery', models.BooleanField(default=False)),
-                ('activity_time', models.TimeField()),
+                ('opens_at', models.TimeField()),
+                ('closes_at', models.TimeField()),
                 ('image', models.CharField(max_length=100)),
                 ('address_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='guest.address')),
             ],

@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.contrib import messages
 from social_django.models import UserSocialAuth
-from guest.models import User
+from guest.models import User, Establishment
 
 def establishment(request):
 	return render(request, 'client/pages/establishment.html')
-
 
 def my_orders(request):
 	return render(request, 'client/pages/my-orders.html')
@@ -25,8 +24,13 @@ def index(request):
 		else:
 			messages.error(request, 'Usuário não cadastrado')
 			return render(request, 'guest/login.html')
-
+	
+	context['establishments'] = get_all_establishments()
+	
 	return render(request, 'client/index.html', context)
+
+def get_all_establishments():
+	return Establishment.objects.all()
 
 def is_social_user(request_user):
 	has_user = UserSocialAuth.objects.filter(
