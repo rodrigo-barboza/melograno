@@ -14,6 +14,7 @@
     <div class="blank-space"></div>
 
     <!-- for item in meus pedidos: -->
+    {% if order_list %}
     <div class="grid order_section">
         {% for order in order_list %}
         <div class="card w-25">
@@ -51,5 +52,13 @@
         {% endfor %}        
     </div>
 
+
+
+    {% else %}
+    <div class="empty_state">
+      <p>Não há nada aqui!</p>
+      <img src="{% static 'client/images/empty-state.png' %}" alt="Vazio">
+    </div>
+    {% endif %}
 
 {% endblock %}

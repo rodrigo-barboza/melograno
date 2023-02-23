@@ -56,3 +56,18 @@ a:hover {
     padding-left: 5%;
     padding-right: 5%;
 }
+
+.empty_state{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty_state p{
+    font-size: 48px;
+    font-weight: 500;
+}
+
+
+
