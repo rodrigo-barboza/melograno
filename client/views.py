@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib import messages
 from social_django.models import UserSocialAuth
-from guest.models import User, Establishment
+from guest.models import User, Order, Plate, Establishment
+from django.core.paginator import Paginator
 import random
 
 def establishment(request, establishment_id):
@@ -12,7 +13,17 @@ def establishment(request, establishment_id):
 	return render(request, 'client/pages/establishment.html', context)
 
 def my_orders(request):
-	return render(request, 'client/pages/my-orders.html')
+	user_id = request.user.user_id
+	order_list = Order.objects.filter(user_id=user_id).all()
+	for order in order_list:
+		order.plates = Plate.objects.filter(order_id = order.order_id).all()
+	#paginação
+	paginator = Paginator(order_list, 3) # Mostra 3 pedidos por página
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+	dict = {'page_obj': page_obj}
+	
+	return render(request, 'client/pages/my-orders.html', dict)
 
 def profile(request):
 	return render(request, 'client/pages/profile.html')

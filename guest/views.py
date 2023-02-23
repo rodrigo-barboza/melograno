@@ -107,6 +107,9 @@ def order(request):
 def products(request):
 	return render(request, 'guest/products.html')
 
+def profile(request):
+	return render(request, 'guest/profile.html')
+
 @csrf_exempt
 def register(request):
 	data = json.loads(request.body)

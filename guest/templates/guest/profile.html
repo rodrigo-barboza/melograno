@@ -1,37 +1,41 @@
 {% extends 'client/layouts/base.html' %} {% load static %} {% block title %}
 Peça agora! {% endblock %} {% block content %}
-<link href="{% static 'client/css/profile.css' %}" rel="stylesheet" />
+<link href="{% static 'guest/css/profile.css' %}" rel="stylesheet" />
 
-<div class="my-profile">Meu Perfil</div>
+<div class="my-profile">Meu Estabelecimento</div>
 
-<div class="client-info">
-  <div class="client-text-description">
-    <div class="client-name">Francisco Luan Ramos</div>
-    <div class="client-adress">
-      Travessa São Miguel, apto 3a, SantoAntônio - Juazeiro, BA
+<div class="owner-info">
+  <div class="owner-text-description">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <div class="profile-body-text">
+          <h2 class="product-title">Habib's Petrolina</h2>
+
+          <p class="product-text-description">
+            Lanches ◍ 20 - 30min <br />
+            Entrega e Retirada no Local
+          </p>
+
+          <div><img src="{% static 'guest/images/rating.png' %}" /></div>
+        </div>
+      </div>
     </div>
-    <div class="client-form">
+    <div class="owner-form">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nome</label>
         <input type="text" class="form-control" id="exampleFormControlInput1" />
       </div>
 
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="meuemail@exemplo.com"
-        />
+        <label for="exampleFormControlInput1" class="form-label">CNPJ</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" />
       </div>
 
       <div class="mb-3">
-        <label for="inputPassword" class="col-sm-2 col-form-label"
-          >Password</label
+        <label for="formFile" class="form-label"
+          >Identidade visual</label
         >
-
-        <input type="password" class="form-control" id="inputPassword" />
+        <input class="form-control" type="file" id="formFile" />
       </div>
     </div>
 
@@ -49,7 +53,9 @@ Peça agora! {% endblock %} {% block content %}
         </div>
 
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Bairro</label>
+          <label for="exampleFormControlInput1" class="form-label"
+            >Bairro</label
+          >
           <input
             type="text"
             class="form-control"
@@ -59,13 +65,14 @@ Peça agora! {% endblock %} {% block content %}
 
         <div class="mb-3">
           <label for="inputPassword" class="col-sm-2 col-form-label"
-            >Número</label>
+            >Número</label
+          >
           <input type="number" class="form-control" id="inputPassword" />
         </div>
       </div>
     </div>
   </div>
-  <img src="{% static 'client/images/client-profile-icon.png' %}" />
+  <img src="{% static 'guest/images/owner-profile-icon.png' %}" />
 </div>
 
 {% endblock %}
