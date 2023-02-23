@@ -29,9 +29,9 @@
             <img src="{% static 'guest/images/logo.png' %}" width="267">
         </div>
         <div id="navbar" class="navbar-items nav-links">
-            <a href="{% url 'client:index' %}" class="menu-item active">Início</a>
-            <a href="" class="menu-item">Restaurantes</a>
-            <a href="" class="menu-item">Bebidas</a>
+            <a href="{% url 'owner:establishment_products' %}" class="menu-item active">Meus produtos</a>
+            <a href="{% url 'owner:order_history' %}" class="menu-item">Histórico de venda</a>
+            <a href="{% url 'owner:orders' %}" class="menu-item">Pedidos</a>
         </div>
         <div>
             <div id="search">
@@ -42,18 +42,11 @@
             </div>
         </div>
         <div id="buttons" class="logo-align d-flex">
-            <div class="position-relative" style="margin-right: 75px; cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 14px">
-                    4
-                </span>
-                <img src="{% static 'guest/images/cart.svg' %}" />
-            </div>
             <div id="drop-down-user" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
                 <img src="{% static 'guest/images/user.svg' %}" />
             </div>
             <ul class="dropdown-menu" aria-labelledby="drop-down-user" style="transition: .5 ease all;">
-                <li><a class="dropdown-item" href="{% url 'client:my_orders' %}">Meus pedidos</a></li>
-                <li><a class="dropdown-item" href="{% url 'client:profile' %}">Perfil</a></li>
+                <li><a class="dropdown-item" href="{% url 'owner:establishment_profile' %}">Meu estabelecimento</a></li>
                 <li><a class="dropdown-item" href="{% url 'user_logout' %}">Sair</a></li>
             </ul>
         </div>
@@ -85,6 +78,9 @@
     const dropDown = document.querySelector('.dropdown-menu');
     const dropDownBtn = document.querySelector('#drop-down-user');
 
+    const botao = document.querySelector('.cart-btn')
+    const carrinho = document.querySelector('.carrinho')
+
     dropDownBtn.addEventListener('click', () => {
         setTimeout(() => {
             if (dropDown.classList.contains('show')) {
@@ -92,6 +88,16 @@
             }
         }, 50)
     });
+
+    botao.addEventListener('click', () => {
+        if (carrinho.style.display === 'none') {
+            carrinho.style.display = 'block'; 
+      } else {
+            carrinho.style.display = 'none'; 
+      }
+});
+
+
 </script>
 
 </html>
