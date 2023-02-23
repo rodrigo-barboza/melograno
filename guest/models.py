@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-
 ROLES = (
     ('client','Cliente'),
     ('owner','Proprietário'),
@@ -58,3 +57,32 @@ class User(AbstractUser):
     
     def is_owner(self):
         return self.role == 'owner'
+
+class Menu(models.Model):
+    menu_id = models.AutoField(primary_key=True)
+    establishment_id = models.ForeignKey(Establishment, on_delete=models.CASCADE, null=True)
+    categories = models.CharField(max_length=100)
+    delivery = models.BooleanField(default=False)
+
+
+class Order(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    address_id = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    delivery = models.BooleanField(default=False)
+    comment = models.TextField()
+    price = models.FloatField(default=0.0)
+    amount = models.IntegerField(default=0)
+    send_time = models.DateTimeField()
+    payment_method = models.CharField(max_length=100)
+    change = models.FloatField(default=0.0, null=True)
+    status = models.IntegerChoices('Status', 'ENTREGUE AGUARDANDO CANCELADO')
+
+class Plate(models.Model):
+    plate_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    price = models.FloatField(default=0.0)
+    description = models.TextField()
+    image = models.CharField(max_length=100)
+    menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
