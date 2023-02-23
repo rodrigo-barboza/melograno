@@ -30,7 +30,7 @@ class Establishment(models.Model):
     establishment_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     cnpj = models.CharField(max_length=100, null=True)
-    rate = models.FloatField(default=0.0)
+    rate = models.IntegerField(default=0)
     categories = models.CharField(choices=CATEGORIES, max_length=255)
     delivery = models.BooleanField(default=False)
     opens_at = models.TimeField()
