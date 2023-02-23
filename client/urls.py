@@ -15,4 +15,5 @@ urlpatterns = [
 	path('establishment', client_required(views.establishment), name='establishment'),
 	path('my-orders', client_required(views.my_orders), name='my_orders'),
 	path('profile', client_required(views.profile), name='profile'),
+	path('category', client_required(views.category), name='category'),
 ]

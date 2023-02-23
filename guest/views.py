@@ -124,11 +124,11 @@ def register(request):
 			state='inactive',
 		)
 
-		Mail(
-			'Confirmação de email',
-			'Mensagem de teste e tal tal',
-			user.email
-		).send()
+		#Mail(
+		#	'Confirmação de email',
+		#	'Mensagem de teste e tal tal',
+		#	user.email
+		#).send()
 
 		user.save()
 

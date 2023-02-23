@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    {% include 'client/components/cart.html' %}
     <navbar class="d-flex justify-content-between px-4 melograno-navbar">
         <div id="logo" class="logo-align-y">
             <img src="{% static 'guest/images/logo.png' %}" width="267">
@@ -42,7 +43,7 @@
         </div>
         <div id="buttons" class="logo-align d-flex">
             <div class="icon" style="margin-right: 75px; cursor: pointer;">
-                <img src="{% static 'guest/images/cart.svg' %}" />
+                <img class="cart-btn" src="{% static 'guest/images/cart.svg' %}" />
             </div>
             <div id="drop-down-user" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
                 <img src="{% static 'guest/images/user.svg' %}" />
@@ -81,6 +82,9 @@
     const dropDown = document.querySelector('.dropdown-menu');
     const dropDownBtn = document.querySelector('#drop-down-user');
 
+    const botao = document.querySelector('.cart-btn')
+    const carrinho = document.querySelector('.carrinho')
+
     dropDownBtn.addEventListener('click', () => {
         setTimeout(() => {
             if (dropDown.classList.contains('show')) {
@@ -88,6 +92,16 @@
             }
         }, 50)
     });
+
+    botao.addEventListener('click', () => {
+        if (carrinho.style.display === 'none') {
+            carrinho.style.display = 'block'; 
+      } else {
+            carrinho.style.display = 'none'; 
+      }
+});
+
+
 </script>
 
 </html>
