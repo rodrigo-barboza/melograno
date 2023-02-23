@@ -1,0 +1,78 @@
+{% extends 'client/layouts/base.html' %} {% load static %} {% block title %}
+Peça agora! {% endblock %} {% block content %}
+<link href="{% static 'guest/css/profile.css' %}" rel="stylesheet" />
+
+<div class="my-profile">Meu Estabelecimento</div>
+
+<div class="owner-info">
+  <div class="owner-text-description">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <div class="profile-body-text">
+          <h2 class="product-title">Habib's Petrolina</h2>
+
+          <p class="product-text-description">
+            Lanches ◍ 20 - 30min <br />
+            Entrega e Retirada no Local
+          </p>
+
+          <div><img src="{% static 'guest/images/rating.png' %}" /></div>
+        </div>
+      </div>
+    </div>
+    <div class="owner-form">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">CNPJ</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" />
+      </div>
+
+      <div class="mb-3">
+        <label for="formFile" class="form-label"
+          >Identidade visual</label
+        >
+        <input class="form-control" type="file" id="formFile" />
+      </div>
+    </div>
+
+    <div class="address">
+      <div class="address-title">Endereço</div>
+
+      <div class="adress-form">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Rua</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Bairro</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="inputPassword" class="col-sm-2 col-form-label"
+            >Número</label
+          >
+          <input type="number" class="form-control" id="inputPassword" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <img src="{% static 'guest/images/owner-profile-icon.png' %}" />
+</div>
+
+{% endblock %}
