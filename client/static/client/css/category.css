@@ -98,4 +98,15 @@
     border-radius: 15px;
     background-size: cover;
     background-position: center;
-  }
+}
+
+.below-navbar{
+    padding-top: 5vh;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f24443;
+}
+
+.page_link:hover{
+    color: blue;    
+}

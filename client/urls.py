@@ -16,4 +16,5 @@ urlpatterns = [
 	path('my-orders', client_required(views.my_orders), name='my_orders'),
 	path('profile', client_required(views.profile), name='profile'),
 	path('category/<str:category>', client_required(views.category), name='category'),
+	path('plate/<int:plate_id>', client_required(views.get_plate), name='get_plate'),
 ]

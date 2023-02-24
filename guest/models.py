@@ -19,6 +19,17 @@ CATEGORIES = (
     ('italian', 'Italiana'),
 )
 
+STATUS = (
+    ('delivered', 'Entregue'),
+    ('waiting', 'Aguardando'),
+    ('canceled', 'Cancelado'),
+)
+
+FOOD_TYPES = (
+    ('plate', 'Prato'),
+    ('drink', 'Bebida'),
+)
+
 class Address(models.Model):
     address_id = models.AutoField(primary_key=True)
     street = models.CharField(max_length=100)
@@ -61,8 +72,6 @@ class User(AbstractUser):
 class Menu(models.Model):
     menu_id = models.AutoField(primary_key=True)
     establishment_id = models.ForeignKey(Establishment, on_delete=models.CASCADE, null=True)
-    categories = models.CharField(max_length=100)
-    delivery = models.BooleanField(default=False)
 
 
 class Order(models.Model):
@@ -76,7 +85,8 @@ class Order(models.Model):
     send_time = models.DateTimeField()
     payment_method = models.CharField(max_length=100)
     change = models.FloatField(default=0.0, null=True)
-    status = models.IntegerChoices('Status', 'ENTREGUE AGUARDANDO CANCELADO')
+    status = models.CharField(choices=STATUS, max_length=20, default='waiting')
+
 
 class Plate(models.Model):
     plate_id = models.AutoField(primary_key=True)
@@ -84,5 +94,5 @@ class Plate(models.Model):
     price = models.FloatField(default=0.0)
     description = models.TextField()
     image = models.CharField(max_length=100)
+    category = models.CharField(choices=FOOD_TYPES, max_length=20, default='plate')
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)

@@ -1,14 +1,27 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.http import JsonResponse
 from social_django.models import UserSocialAuth
-from guest.models import User, Order, Plate, Establishment
+from django.forms.models import model_to_dict
+from guest.models import User, Order, Plate, Establishment, Menu
 from django.core.paginator import Paginator
 import random
 
 def establishment(request, establishment_id):
 	context = {}
 
-	context['establishment'] = establishment_id
+	establishment = Establishment.objects.filter(establishment_id=establishment_id).first()
+	context['establishment'] = get_fancy_establishment(establishment)
+
+	plates = get_menu_with_plates(establishment_id)
+	plates = Paginator(plates, 4)
+	page_number = request.GET.get('page')
+	context['plates'] = plates.get_page(page_number)
+	
+	drinks = get_menu_with_drinks(establishment_id)
+	drinks = Paginator(drinks, 4)
+	page_number = request.GET.get('page')
+	context['drinks'] = drinks.get_page(page_number)
 
 	return render(request, 'client/pages/establishment.html', context)
 
@@ -41,7 +54,9 @@ def category(request, category):
 
 	context['category'] = categories[category]
 	context['establishments'] = get_establishments_by_category(category)
-	context['establishments'] = get_fancy_establishments(context['establishments'])
+	context['establishments'] = Paginator(get_fancy_establishments(context['establishments']), 6)
+	page_number = request.GET.get('page')
+	context['establishments'] = context['establishments'].get_page(page_number)
 
 	return render(request, 'client/pages/category.html', context)
 
@@ -55,7 +70,12 @@ def index(request):
 			messages.error(request, 'Usuário não cadastrado')
 			return render(request, 'guest/login.html')
 	
-	context['establishments'] = get_all_establishments()
+	context['establishments'] = get_fancy_establishments(get_all_establishments())
+	context['establishments'] = Paginator(
+		get_fancy_establishments(get_all_establishments()), 9
+	)
+	page_number = request.GET.get('page')
+	context['establishments'] = context['establishments'].get_page(page_number)
 	
 	return render(request, 'client/index.html', context)
 
@@ -75,6 +95,51 @@ def get_fancy_establishments(establishments):
 		establishment.rate = range(establishment.rate)
 
 	return establishments
+
+def get_fancy_establishment(establishment):
+	avg_time = ['20min', '30min', '40min', '50min', '60min']
+
+	establishment.avg_time = random.choice(avg_time)
+	establishment.name = establishment.name.title()
+	establishment.outline = range(5 - establishment.rate)
+	establishment.rate = range(establishment.rate)
+
+	return establishment
+
+def get_menu_with_plates(establishment_id):
+	menu = Menu.objects.filter(
+		establishment_id=establishment_id,
+	).first()
+
+	return Plate.objects.filter(
+		menu_id=menu.menu_id,
+		category='plate'
+	).all()
+
+def get_menu_with_drinks(establishment_id):
+	menu = Menu.objects.filter(
+		establishment_id=establishment_id, 
+	).first()
+
+	return Plate.objects.filter(
+		menu_id=menu.menu_id,
+		category='drink'
+	).all()
+
+def get_plate(request, plate_id):
+	plate = Plate.objects.filter(plate_id=plate_id).first()
+
+	if not plate:
+		return JsonResponse({
+			'errors': 'Prato não encontrado.'
+		}, status=406)
+
+	plate_dict = model_to_dict(plate)
+
+	return JsonResponse({
+		'plate': plate_dict
+	}, status=200)
+
 
 def is_social_user(request_user):
 	has_user = UserSocialAuth.objects.filter(

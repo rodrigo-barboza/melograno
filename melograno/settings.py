@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'social_django',
     'widget_tweaks',
     'django.contrib.humanize',
+    'django.core',
 ]
 
 MIDDLEWARE = [
