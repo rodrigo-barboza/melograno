@@ -1,5 +1,7 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,90 +9,88 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="{% static 'owner/css/establishment-signup.css' %}" rel="stylesheet">
   <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet">
-   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/0b732b284f.js" crossorigin="anonymous"></script>
   <title>Document</title>
-  
+
 </head>
+
 <body>
   <div class="row">
     <div class="col-md-6 lado1">
-        <span class="titulo">Preencha as informações do seu estabelecimento</span>
-        <div class="area-inputs-signup"></div>
-        <span class="file-title">Identidade visual</span>
-        <label for="file-input" class="label-file">
-            <i class="fas fa-cloud-upload-alt" style="font-size: 12px;"></i>
-            <span style="font-size: 15px;">Importar arquivo</span>
-            <div class="line"></div>
-            <span id="file-name"></span>
-        </label>
-        <input type="file" id="file-input" class="box-file" name="file" onchange="updateFileName(this)">
+      <span class="titulo">Preencha as informações do seu estabelecimento</span>
+      <div class="area-inputs-signup"></div>
+      <span class="file-title">Identidade visual</span>
+      <label for="file-input" class="label-file">
+        <i class="fas fa-cloud-upload-alt" style="font-size: 12px;"></i>
+        <span style="font-size: 15px;">Importar arquivo</span>
+        <div class="line"></div>
+        <span id="file-name"></span>
+      </label>
+      <input type="file" id="file-input" class="box-file" name="file" onchange="updateFileName(this)">
 
-        <label for="name" class="label-name">Nome do estabelecimento</label>
-            <div>
-                <input type="name" id="name" class="box-name" name="name">
-            </div>
+      <label for="name" class="label-name">Nome do estabelecimento</label>
+      <div>
+        <input type="name" id="name" class="box-name" name="name">
+      </div>
 
-          <div class="section-inputs">
-            <div>
-              <label for="time" class="label-time">Tempo médio de espera</label>
-              <div>
-                  <input type="name" id="time" class="box-time" name="time" placeholder="Ex: 30min">
-              </div>
-            </div>
-            <div class="input2">
-              <label for="categoria" class="label-categoria" >Categoria</label>
-                <select id="categoria" class="box-categoria" name="categoria">
-                  <option value="" disabled selected style="display:none;"></option>
-                  <option value="saudavel">Saudável</option>
-                  <option value="mexicana">Mexicana</option>
-                  <option value="italiana">Italiana</option>
-                  <option value="japonesa">Japonesa</option>
-                  <option value="brasileira">Brasileira</option>
-                </select>
-            </div>
-          </div>
-
-          <div class="user-type-text">Tipo de Usuário</div>
-          <div class="group-buttons">
-            <div class="form-check form-check-inline radio-padding radio-item">
-                <input class="form-check-input" type="radio" name="user_role" id="inlineRadio1" value="delivery">
-                <label class="form-check-label" for="inlineRadio1">Delivery</label>
-            </div>
-            
-            <div class="form-check form-check-inline radio-padding radio-item">
-                <input class="form-check-input" type="radio" name="user_role" id="inlineRadio2" value="retirada">
-                <label class="form-check-label" for="inlineRadio2">Retirada no local</label>
-            </div>
-
-            <div class="form-check form-check-inline radio-padding radio-item">
-              <input class="form-check-input" type="radio" name="user_role" id="inlineRadio3" value="ambos">
-              <label class="form-check-label" for="inlineRadio3">Ambos</label>
+      <div class="section-inputs">
+        <div>
+          <label for="time" class="label-time">Tempo médio de espera</label>
+          <div>
+            <input type="name" id="time" class="box-time" name="time" placeholder="Ex: 30min">
           </div>
         </div>
+        <div class="input2">
+          <label for="categoria" class="label-categoria">Categoria</label>
+          <select id="categoria" class="box-categoria" name="categoria">
+            <option value="" disabled selected style="display:none;"></option>
+            <option value="saudavel">Saudável</option>
+            <option value="mexicana">Mexicana</option>
+            <option value="italiana">Italiana</option>
+            <option value="japonesa">Japonesa</option>
+            <option value="brasileira">Brasileira</option>
+          </select>
+        </div>
+      </div>
 
-        <button class="button-cadastro">Finalizar cadastro</button>
-        
+      <div class="user-type-text">Tipo de Usuário</div>
+      <div class="group-buttons">
+        <div class="form-check form-check-inline radio-padding radio-item">
+          <input class="form-check-input" type="radio" name="user_role" id="inlineRadio1" value="delivery">
+          <label class="form-check-label" for="inlineRadio1">Delivery</label>
+        </div>
+
+        <div class="form-check form-check-inline radio-padding radio-item">
+          <input class="form-check-input" type="radio" name="user_role" id="inlineRadio2" value="retirada">
+          <label class="form-check-label" for="inlineRadio2">Retirada no local</label>
+        </div>
+
+        <div class="form-check form-check-inline radio-padding radio-item">
+          <input class="form-check-input" type="radio" name="user_role" id="inlineRadio3" value="ambos">
+          <label class="form-check-label" for="inlineRadio3">Ambos</label>
+        </div>
+      </div>
+
+      <button class="button-cadastro">Finalizar cadastro</button>
+
     </div>
     <div class="col-md-6 lado2">
       <img class="img-logo" src="{% static 'owner/images/logo.png' %}" width="267" class="logo-align">
       <div class="img-principal justify-content-center">
-          <img src="{% static 'owner/images/img-establishment.png' %}" width="550" alt="">
+        <img src="{% static 'owner/images/img-establishment.png' %}" width="550" alt="">
       </div>
     </div>
-</div>
-<script>
+  </div>
+  <script>
     function updateFileName(input) {
       var fileName = input.files[0].name;
       var fileDisplay = document.getElementById("file-name");
       fileDisplay.textContent = fileName;
-}
-
-
-</script>
+    }
+  </script>
 </body>
+
 </html>
-
-
