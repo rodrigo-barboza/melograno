@@ -23,6 +23,7 @@ STATUS = (
     ('delivered', 'Entregue'),
     ('waiting', 'Aguardando'),
     ('canceled', 'Cancelado'),
+    ('in_cart', 'No carrinho'),
 )
 
 FOOD_TYPES = (
@@ -96,3 +97,17 @@ class Plate(models.Model):
     image = models.CharField(max_length=100)
     category = models.CharField(choices=FOOD_TYPES, max_length=20, default='plate')
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
+
+class Cart(models.Model):
+    cart_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class CartItem(models.Model):
+    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    plate_id = models.ForeignKey(Plate, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+class OrderItem(models.Model):
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    plate_id = models.ForeignKey(Plate, on_delete=models.CASCADE)
+
