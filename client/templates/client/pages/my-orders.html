@@ -17,9 +17,9 @@
     <!-- for item in meus pedidos: -->
     {% if page_obj %}
     <div class="page_content">
-      <div class="grid order_section">
+      <div class="grid_flex_body order_section">
         {% for order in page_obj.object_list %}
-        <div class="card w-25">
+        <div class="card w-25 order_margin">
             <div class="card-body">
               <h5 class="card-title">{{order.plate_id.establishment_id.name}}</h5>
               <p class="card-text adress-txt">{{order.address_id.street}}, {{order.address_id.district}}</p>
@@ -28,26 +28,26 @@
               <!-- for item in ORDER: Div Flex Start order_name flex end order_price -->
               <!-- Fazer outro elemento no DICIONÁRIO do request e pegar por lá -->
               {% for plates in order.plates %}
-              <div class="grid">
-                <p class="item">{{plates.name}}</p>
+              <div class="grid_flex">
+                <p class="item_grid">{{plates.name}}</p>
                 <p class="price">{{plates.price}}</p>
               </div>
               {% endfor %}
-              <!-- <div class="grid"> EXEMPLO
+              <!-- <div class="grid_flex"> EXEMPLO
                 <p class="item">Batatinha Frita Show de bola</p>
                 <p class="price">13,80</p>
               </div>-->
               <hr>
               <!-- Aqui embaixo vai o preço, taxa de entrega e total -->
-              <div class="grid">
-                <p class="item">Total dos pedidos</p>
+              <div class="grid_flex">
+                <p class="item_grid">Total dos pedidos</p>
                 <p class="price">{{order.price}}</p>
               </div>
-              <div class="grid">
-                <p class="item">Taxa de Entrega</p>
+              <div class="grid_flex">
+                <p class="item_grid">Taxa de Entrega</p>
                 <p class="price">5,00</p>
               </div>
-              <div class="grid">
+              <div class="grid_flex">
                 <p class="item-total">Total</p>
                 <p class="price-total">{{order.price}} + 5</p>
               </div>
@@ -64,7 +64,7 @@
             {% endif %}
         
             <span class="current">
-                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
             </span>
           
             {% if page_obj.has_next %}
