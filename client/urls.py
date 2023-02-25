@@ -20,4 +20,6 @@ urlpatterns = [
 	path('cart/add-item', client_required(views.add_to_cart), name='add_to_cart'),
 	path('cart-info', client_required(views.get_cart_count), name='get_cart_count'),
 	path('cart-all-info', client_required(views.get_cart), name='get_cart'),
+	path('clear-cart', client_required(views.clear_cart), name='clear_cart'),
+	path('order/create', client_required(views.create_order), name='create_order'),
 ]
