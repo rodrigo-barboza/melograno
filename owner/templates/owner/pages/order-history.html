@@ -4,7 +4,89 @@
 {% block title %} Titulo da página {% endblock %}
 
 {% block content %}
+<link href="{% static 'owner/css/order-history.css' %}" rel="stylesheet">
 
-    CONTEÚDO AQUI!
+<header class="d-flex justify-content-between p-3">
+    <h3 class="align-self-center">Histórico de Venda</h3>
+</header>
+
+<div class="blank-space"></div>
+
+<div class="">
+  <div class="grid_flex order_section">
+    <div class="card flex_item">
+        <div class="card-body">
+          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
+          <p class="card-text adress-txt">order.address_id.street</p>
+          <p class="card-text adress-txt">order.send_time|naturaltime</p>
+          <hr>
+          <div class="flex_price">
+            <p class="item_name">plates.name</p>
+            <p class="price">plates.price</p>
+          </div>
+        </div>
+    </div>
+    <div class="card flex_item">
+        <div class="card-body">
+          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
+          <p class="card-text adress-txt">order.address_id.street</p>
+          <p class="card-text adress-txt">order.send_time|naturaltime</p>
+          <hr>
+          <div class="flex_price">
+            <p class="item_name">plates.name</p>
+            <p class="price">plates.price</p>
+          </div>
+        </div>
+    </div> 
+    <div class="card flex_item">
+        <div class="card-body">
+          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
+          <p class="card-text adress-txt">order.address_id.street</p>
+          <p class="card-text adress-txt">order.send_time|naturaltime</p>
+          <hr>
+          <div class="flex_price">
+            <p class="item_name">plates.name</p>
+            <p class="price">plates.price</p>
+          </div>
+        </div>
+    </div> 
+    <div class="card flex_item">
+        <div class="card-body">
+          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
+          <p class="card-text adress-txt">order.address_id.street</p>
+          <p class="card-text adress-txt">order.send_time|naturaltime</p>
+          <hr>
+          <div class="flex_price">
+            <p class="item_name">plates.name</p>
+            <p class="price">plates.price</p>
+          </div>
+        </div>
+    </div> 
+    <div class="card flex_item">
+        <div class="card-body">
+          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
+          <p class="card-text adress-txt">order.address_id.street</p>
+          <p class="card-text adress-txt">order.send_time|naturaltime</p>
+          <hr>
+          <div class="flex_price">
+            <p class="item_name">plates.name</p>
+            <p class="price">plates.price</p>
+          </div>
+        </div>
+    </div> 
+    <div class="card flex_item">
+        <div class="card-body">
+          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
+          <p class="card-text adress-txt">order.address_id.street</p>
+          <p class="card-text adress-txt">order.send_time|naturaltime</p>
+          <hr>
+          <div class="flex_price">
+            <p class="item_name">plates.name</p>
+            <p class="price">plates.price</p>
+          </div>
+        </div>
+    </div> 
+  </div>
+</div>
 
 {% endblock %}

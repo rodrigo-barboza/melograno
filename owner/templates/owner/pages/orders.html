@@ -4,7 +4,132 @@
 {% block title %} Titulo da página {% endblock %}
 
 {% block content %}
+<link href="{% static 'owner/css/orders.css' %}" rel="stylesheet">
 
-    CONTEÚDO AQUI!
+<nav class="navbar navbar-light" style="background-color: #f24443;">
+    <a class="navbar-brand">
+      <div class="sub-navbar">Meus Pedidos</div>
+    </a>
+</nav>
+
+
+    <div class="grid-order">
+        <div class="order">
+            <span class="name">Francisco Luan Ramos <span class="time">19:30</span></span>
+            <span class="adress">Travessa São Miguel, apto 3a, SantoAntônio - Juazeiro, BA</span>
+            <div class="line-top"></div>
+            <div class="produtos-order">
+                <div class="item-order">
+                    <span class="descricao-order">8 BIB'SFIHAS CLÁSSICAS</span>
+                    <span class="valor-order">R$ 19,90</span>
+                </div>
+                <div class="item-order">
+                    <span class="descricao-order">COCA-COLA 1L</span>
+                    <span class="valor-order">R$ 8,90</span>
+                </div>
+            </div>
+            <div class="line-down"></div>
+            <div class="area-subtotal-order">
+                <span class="subtotal-order">Subtotal</span>
+                <span class="valor-subtotal-order">R$ 28,80</span>
+            </div>
+            <div class="area-entrega-order">
+                <span class="entrega-order">Taxa de entrega</span>
+                <span class="valor-entrega-order">R$ 8,90</span>
+            </div>
+            <div class="area-total-order">
+                <span class="total-order">Total</span>
+                <span class="valor-total-order">R$ 35,80</span>
+            </div>
+            <div class="botoes-order">
+                <button class="cancelar">Cancelar</button>
+                <button class="finalizar">Finalizar</button>
+            </div>
+        </div>
+    
+        <div class="order">
+            <span class="name">Francisco Luan Ramos <span class="time">19:30</span></span>
+            <span class="adress">Travessa São Miguel, apto 3a, SantoAntônio - Juazeiro, BA</span>
+            <div class="line-top"></div>
+            <div class="produtos-order">
+                <div class="item-order">
+                    <span class="descricao-order">8 BIB'SFIHAS CLÁSSICAS</span>
+                    <span class="valor=order">R$ 19,90</span>
+                </div>
+                <div class="item-order">
+                    <span class="descricao-order">COCA-COLA 1L</span>
+                    <span class="valor-order">R$ 8,90</span>
+                </div>
+            </div>
+            <div class="line-down"></div>
+            <div class="area-subtotal-order">
+                <span class="subtotal-order">Subtotal</span>
+                <span class="valor-subtotal-order">R$ 28,80</span>
+            </div>
+            <div class="area-entrega-order">
+                <span class="entrega-order">Taxa de entrega</span>
+                <span class="valor-entrega-order">R$ 8,90</span>
+            </div>
+            <div class="area-total-order">
+                <span class="total-order">Total</span>
+                <span class="valor-total-order">R$ 35,80</span>
+            </div>
+            <div class="botoes-order">
+                <button class="cancelar">Cancelar</button>
+                <button class="finalizar">Finalizar</button>
+            </div>
+        </div>
+    
+        <div class="order">
+            <span class="name">Francisco Luan Ramos <span class="time">19:30</span></span>
+            <span class="adress">Travessa São Miguel, apto 3a, SantoAntônio - Juazeiro, BA</span>
+            <div class="line-top"></div>
+            <div class="produtos-order">
+                <div class="item-order">
+                    <span class="descricao-order">8 BIB'SFIHAS CLÁSSICAS</span>
+                    <span class="valor=order">R$ 19,90</span>
+                </div>
+                <div class="item-order">
+                    <span class="descricao-order">COCA-COLA 1L</span>
+                    <span class="valor-order">R$ 8,90</span>
+                </div>
+            </div>
+            <div class="line-down"></div>
+            <div class="area-subtotal-order">
+                <span class="subtotal-order">Subtotal</span>
+                <span class="valor-subtotal-order">R$ 28,80</span>
+            </div>
+            <div class="area-entrega-order">
+                <span class="entrega-order">Taxa de entrega</span>
+                <span class="valor-entrega-order">R$ 8,90</span>
+            </div>
+            <div class="area-total-order">
+                <span class="total-order">Total</span>
+                <span class="valor-total-order">R$ 35,80</span>
+            </div>
+            <div class="botoes-order">
+                <button class="cancelar">Cancelar</button>
+                <button class="finalizar">Finalizar</button>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="...">
+        <ul class="pagination paginas">
+          <li class="page-item disabled">
+            <a class="page-link voltar"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link active-page" href="#" >2</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="botao-adicionar">Adicionar novo</button>
 
 {% endblock %}
