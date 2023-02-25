@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from social_django.models import UserSocialAuth
 from django.forms.models import model_to_dict
-from guest.models import User, Order, Plate, Cart, Establishment, Menu, CartItem
+from guest.models import User, Order, Plate, Cart, Establishment, Menu, CartItem, OrderItem
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 import random
@@ -31,14 +31,18 @@ def my_orders(request):
 	user_id = request.user.user_id
 	order_list = Order.objects.filter(user_id=user_id).all()
 	for order in order_list:
-		order.plates = Plate.objects.filter(order_id = order.order_id).all()
+		allPlates = OrderItem.objects.filter(order_id = order.order_id).all()
+		aux = []
+		for item in allPlates:
+			aux += Plate.objects.filter(plate_id = item.plate_id.plate_id).all()
+		order.plates = aux
 	#paginação
 	paginator = Paginator(order_list, 3) # Mostra 3 pedidos por página
 	page_number = request.GET.get('page')
 	page_obj = paginator.get_page(page_number)
-	dict = {'page_obj': page_obj}
+	context = {'page_obj': page_obj}
 	
-	return render(request, 'client/pages/my-orders.html', dict)
+	return render(request, 'client/pages/my-orders.html', context)
 
 def profile(request):
 	return render(request, 'client/pages/profile.html')
