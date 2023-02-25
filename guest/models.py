@@ -80,12 +80,9 @@ class Order(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     address_id = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
     delivery = models.BooleanField(default=False)
-    comment = models.TextField()
     price = models.FloatField(default=0.0)
-    amount = models.IntegerField(default=0)
     send_time = models.DateTimeField()
     payment_method = models.CharField(max_length=100)
-    change = models.FloatField(default=0.0, null=True)
     status = models.CharField(choices=STATUS, max_length=20, default='waiting')
 
 
@@ -110,4 +107,4 @@ class CartItem(models.Model):
 class OrderItem(models.Model):
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
     plate_id = models.ForeignKey(Plate, on_delete=models.CASCADE)
-
+    quantity = models.PositiveIntegerField(default=1)
