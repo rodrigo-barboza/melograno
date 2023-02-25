@@ -3,9 +3,11 @@ from django.contrib import messages
 from django.http import JsonResponse
 from social_django.models import UserSocialAuth
 from django.forms.models import model_to_dict
-from guest.models import User, Order, Plate, Establishment, Menu
+from guest.models import User, Order, Plate, Cart, Establishment, Menu, CartItem
 from django.core.paginator import Paginator
+from django.views.decorators.csrf import csrf_exempt
 import random
+import json
 
 def establishment(request, establishment_id):
 	context = {}
@@ -180,3 +182,92 @@ def register_with_google(request):
 		)
 
 		user.save()
+
+@csrf_exempt
+def add_to_cart(request):
+	current_item = json.loads(request.body)
+	current_item = current_item['current_plate']
+
+	user_cart = Cart.objects.filter(
+		user_id=request.user.user_id
+	).first()
+
+	if not user_cart:
+		user_cart = Cart.objects.create(user_id=request.user)
+
+	create_cart_item(user_cart, current_item)
+
+	return JsonResponse({
+		'message': 'Adicionado ao carrinho com sucesso.'
+	}, status=201)
+
+
+def create_cart_item(user_cart, current_item):
+	plate_id = current_item.get('plate_id')
+	plate = Plate.objects.filter(plate_id=plate_id).first()
+
+	CartItem.objects.create(
+		cart_id=user_cart,
+		plate_id=plate,
+		quantity=current_item.get('quantity')
+	)
+
+def get_cart_count(request):
+	user_cart = Cart.objects.filter(
+		user_id=request.user.user_id
+	).first()
+
+	if not user_cart:
+		return JsonResponse({
+			'message': 'Carrinho do usuário vazio'
+		}, status=204)
+	
+	cart_items = CartItem.objects.filter(
+		cart_id=user_cart.cart_id
+	).all()
+
+	return JsonResponse({
+		'cart': list(cart_items.values())
+	}, status=200)
+
+
+def get_cart(request):
+	user_cart = Cart.objects.filter(
+		user_id=request.user.user_id
+	).first()
+
+	if not user_cart:
+		return JsonResponse({
+			'message': 'Carrinho do usuário vazio'
+		}, status=204)
+	
+	cart_items = CartItem.objects.filter(
+		cart_id=user_cart.cart_id
+	).all()
+
+	plates = get_cart_plates(cart_items)
+
+	return JsonResponse({
+		'cart': plates
+	}, status=200, safe=False)
+
+
+def get_cart_plates(cart_items):
+	plates = []
+
+	for cart_item in cart_items:
+		plate = Plate.objects.filter(
+			plate_id=cart_item.plate_id.plate_id
+		).first()
+
+		plates.append({
+			'plate_id': plate.plate_id,
+			'name': plate.name,
+			'price': plate.price,
+			'description': plate.description,
+			'image': plate.image,
+			'category': plate.category,
+			'quantity': cart_item.quantity
+		})
+
+	return plates

@@ -116,12 +116,10 @@
         axios.get(`/client/plate/${item_id}`)
             .then(response => {
                 addModalInfo(response.data.plate);
-            });
-        
+            }); 
     });
 
     const addModalInfo = (item) => {
-        console.log(item);
         const itemTitle = document.querySelector('#item-name');
         const itemDescription = document.querySelector('#item-description');
         const itemPrice = document.querySelector('#item-price');
@@ -134,8 +132,24 @@
         itemImage.style.backgroundSize = 'contain';
         itemImage.style.backgroundPosition = 'center';
 
-        currentPlate = item.plate_id;
+        currentPlate = item;
+        let itemPriceButton = document.querySelector('#current-price');
+        itemPriceButton.innerHTML = itemPrice.innerHTML;
     };
 
+    const addItemToCart = () => {
+        let currentPrice = document.querySelector('#current-price').innerHTML;
+        currentPrice = parseFloat(currentPrice.replace('R$ ', '').replace(',', '.'));
+
+        currentPlate.total_item = currentPrice;
+        currentPlate.quantity = currentPrice / currentPlate.price;
+        console.log(currentPlate);
+
+        axios.post('/client/cart/add-item', {
+            'current_plate': currentPlate,
+        }).then(response => {
+            getCartCount();
+        });
+    };
 </script>
 {% endblock %}

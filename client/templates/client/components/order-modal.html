@@ -33,7 +33,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" style="background-color: #f34444">
+        <button onclick="addItemToCart()" data-bs-dismiss="modal" type="button" class="btn btn-primary" style="background-color: #f34444">
           <div>Adicionar</div>
           <div style="margin-left: 20px"></div>
           <div id="current-price">$19,90</div>
@@ -78,5 +78,4 @@
     const buttonPrice = document.querySelector('#current-price');
     buttonPrice.innerHTML = `R$ ${currentPrice.toString().replace('.', ',')}`;
   };
-
 </script>

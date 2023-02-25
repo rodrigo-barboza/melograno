@@ -17,4 +17,7 @@ urlpatterns = [
 	path('profile', client_required(views.profile), name='profile'),
 	path('category/<str:category>', client_required(views.category), name='category'),
 	path('plate/<int:plate_id>', client_required(views.get_plate), name='get_plate'),
+	path('cart/add-item', client_required(views.add_to_cart), name='add_to_cart'),
+	path('cart-info', client_required(views.get_cart_count), name='get_cart_count'),
+	path('cart-all-info', client_required(views.get_cart), name='get_cart'),
 ]
