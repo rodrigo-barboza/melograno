@@ -15,7 +15,6 @@ header {
     display: flex;
     flex-flow: row wrap;
     justify-content: start;
-    align-items: center;
 }
 
 .flex_price{
@@ -34,8 +33,8 @@ header {
 .grid {
     margin-top: 2rem;
 	display: grid;
-    grid-template-columns: 200px 200px 200px;
-    grid-template-rows: 200px;
+    grid-template-columns: 300px 300px 300px;
+    grid-template-rows: 300px;
     justify-content: start;
     grid-gap: 50px 270px;
 }
@@ -57,3 +56,28 @@ header {
     color: #f24443;
 }
 
+.empty_state, .below-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty_state p{
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.page_link:hover{
+    color: blue;    
+}
+
+.order_section{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.order_margin{
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}

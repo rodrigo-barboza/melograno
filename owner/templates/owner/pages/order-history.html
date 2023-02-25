@@ -1,5 +1,6 @@
 {% extends 'owner/layouts/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} Titulo da página {% endblock %}
 
@@ -8,85 +9,58 @@
 
 <header class="d-flex justify-content-between p-3">
     <h3 class="align-self-center">Histórico de Venda</h3>
+    
 </header>
 
 <div class="blank-space"></div>
 
-<div class="">
-  <div class="grid_flex order_section">
-    <div class="card flex_item">
-        <div class="card-body">
-          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
-          <p class="card-text adress-txt">order.address_id.street</p>
-          <p class="card-text adress-txt">order.send_time|naturaltime</p>
-          <hr>
-          <div class="flex_price">
-            <p class="item_name">plates.name</p>
-            <p class="price">plates.price</p>
+{% if page_obj %}
+
+  <div class="page_content">
+    <div class="grid_flex order_section">
+      <!-- o primeiro for pega daqui -->
+      {% for order in page_obj.object_list %}
+      <div class="card w-25 flex_item order_margin">
+          <div class="card-body">
+            <h5 class="card-title">{{order.user_id}}</h5>
+            <p class="card-text adress-txt">{{order.address_id.street}}</p>
+            <p class="card-text adress-txt">{{order.send_time|naturaltime}}</p>
+            <hr>
+            <!-- aqui vai um dos for show, o de pegar os pratos -->
+            {% for plates in order.plates %}
+            <div class="flex_price">
+              <p class="item_name">{{plates.name}}</p>
+              <p class="price">{{plates.price}}</p>
+            </div>
+            {% endfor %}
           </div>
-        </div>
+      </div>
+      {% endfor %}
     </div>
-    <div class="card flex_item">
-        <div class="card-body">
-          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
-          <p class="card-text adress-txt">order.address_id.street</p>
-          <p class="card-text adress-txt">order.send_time|naturaltime</p>
-          <hr>
-          <div class="flex_price">
-            <p class="item_name">plates.name</p>
-            <p class="price">plates.price</p>
-          </div>
-        </div>
-    </div> 
-    <div class="card flex_item">
-        <div class="card-body">
-          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
-          <p class="card-text adress-txt">order.address_id.street</p>
-          <p class="card-text adress-txt">order.send_time|naturaltime</p>
-          <hr>
-          <div class="flex_price">
-            <p class="item_name">plates.name</p>
-            <p class="price">plates.price</p>
-          </div>
-        </div>
-    </div> 
-    <div class="card flex_item">
-        <div class="card-body">
-          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
-          <p class="card-text adress-txt">order.address_id.street</p>
-          <p class="card-text adress-txt">order.send_time|naturaltime</p>
-          <hr>
-          <div class="flex_price">
-            <p class="item_name">plates.name</p>
-            <p class="price">plates.price</p>
-          </div>
-        </div>
-    </div> 
-    <div class="card flex_item">
-        <div class="card-body">
-          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
-          <p class="card-text adress-txt">order.address_id.street</p>
-          <p class="card-text adress-txt">order.send_time|naturaltime</p>
-          <hr>
-          <div class="flex_price">
-            <p class="item_name">plates.name</p>
-            <p class="price">plates.price</p>
-          </div>
-        </div>
-    </div> 
-    <div class="card flex_item">
-        <div class="card-body">
-          <h5 class="card-title">order.plate_id.establishment_id.name</h5>
-          <p class="card-text adress-txt">order.address_id.street</p>
-          <p class="card-text adress-txt">order.send_time|naturaltime</p>
-          <hr>
-          <div class="flex_price">
-            <p class="item_name">plates.name</p>
-            <p class="price">plates.price</p>
-          </div>
-        </div>
-    </div> 
+    <div class="pagination below-navbar">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a class="page_link" href="?page=1">&laquo; Primeira</a>
+              <a class="page_link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+          {% endif %}
+      
+          <span class="current">
+              Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+          </span>
+        
+          {% if page_obj.has_next %}
+              <a class="page_link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+              <a class="page_link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+          {% endif %}
+      </span>
+    </div>
   </div>
-</div>
+
+{% else %}
+    <div class="empty_state">
+      <p>Não há nada aqui!</p>
+      <img src="{% static 'owner/images/empty-state.png' %}" alt="Vazio">
+    </div>
+{% endif %}
 
 {% endblock %}

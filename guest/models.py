@@ -79,6 +79,7 @@ class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     address_id = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    establishment_id = models.ForeignKey(Establishment, on_delete=models.CASCADE, null=True)
     delivery = models.BooleanField(default=False)
     price = models.FloatField(default=0.0)
     send_time = models.DateTimeField()
