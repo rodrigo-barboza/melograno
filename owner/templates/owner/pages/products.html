@@ -4,15 +4,19 @@
 {% block title %} Meus produtos {% endblock %}
 
 {% block content %}
+
+{% include 'owner/components/add-product-modal.html' %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'owner/css/products.css'%}"/>
 <script src="https://unpkg.com/phosphor-icons"></script>
 
 <header class="d-flex justify-content-between p-3">
-    <h3 class="align-self-center">Meus pedidos</h3>
-    <div class="new-product">
-        <h5>Adicionar Novo</h5>
-    </div>
+    <h3 class="align-self-center">Meus produtos</h3>
+    <button class="new-product" id="botao-add">
+       Adicionar novo
+    </button>
 </header>
+
 
 <div class="body-content">
     <div class="products">
@@ -75,5 +79,26 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    var modal = document.querySelector(".modal-ex");
+    var botao = document.querySelector("#botao-add");
+    var fechar = document.querySelector("#fechar-modal");
+    botao.addEventListener('click', function() {
+        modal.style.display = 'flex'
+    })
+
+    fechar.addEventListener('click', function() {
+        modal.style.display = 'none'
+    })
+
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) { // verifica se o clique ocorreu fora do modal
+            modal.style.display = "none"; // fecha o modal
+        }
+});
+
+</script>
 
 {% endblock %}

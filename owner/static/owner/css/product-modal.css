@@ -1,0 +1,52 @@
+
+
+
+
+.modal-ex { /* esconde o modal por padrão */
+    position: fixed; /* define a posição como fixa */
+    z-index: 1; /* define a ordem de sobreposição do modal */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* permite rolar a página por trás do modal */
+    background-color: rgba(0, 0, 0, 0.4); /* define a cor de fundo do modal */
+    display: flex; /* permite centralizar verticalmente e horizontalmente */
+    align-items: center; /* centraliza verticalmente */
+    justify-content: center; /* centraliza horizontalmente */
+    display: none;
+  }
+  
+  /* Estilo para o conteúdo do modal */
+  .modal-content-ex {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .add-product-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.ph-x{
+    color:#F34444;
+    cursor: pointer;
+}
+.add-btn{
+    width: 210.1px;
+    height: 44.56px;
+    background: #F34444;
+    border-radius: 4.865px;
+    border-color: transparent;
+    color: white;
+}
+.add-product-footer{
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
