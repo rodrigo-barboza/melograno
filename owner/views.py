@@ -6,6 +6,9 @@ def index(request):
 def establishment_details(request):
 	return render(request, 'owner/establishment-signup.html')
 
+def add_product(request):
+	return render(request, 'owner/components/add-product-modal.html')
+
 def establishment_products(request):
 	return render(request, 'owner/pages/products.html')
 
