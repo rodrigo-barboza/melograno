@@ -42,9 +42,9 @@
             </div>
         </div>
         <div id="buttons" class="logo-align d-flex">
-            <div class="position-relative" style="margin-right: 75px; cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 14px">
-                    4
+            <div onclick="getCart()" class="position-relative" style="margin-right: 75px; cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <span id="cart-items-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 14px">
+                    0
                 </span>
                 <img src="{% static 'guest/images/cart.svg' %}" />
             </div>
@@ -92,6 +92,17 @@
             }
         }, 50)
     });
+
+    const cartItemsCount = document.querySelector('#cart-items-count');
+
+    const getCartCount = () => {
+        axios.get('/client/cart-info')
+            .then(response => {
+                cartItemsCount.innerHTML = response.data.cart.length;
+            });
+    };
+
+    getCartCount();
 </script>
 
 </html>
