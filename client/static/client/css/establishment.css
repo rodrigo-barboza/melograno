@@ -15,6 +15,8 @@ a:hover {
 .drinks,
 .profile {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .profile {
@@ -33,7 +35,7 @@ header {
     flex-direction: row;
     align-content: center;
     background-color: #F2F2F2;
-    height: 220px;
+    width: 45%;
     left: 20.08px;
     top: 744.4px;
     border-radius: 19px;
@@ -99,4 +101,77 @@ header {
 .show-more:hover {
     color: #fff;
     background-color: #F34747;
+}
+
+.image-container {
+    width: 163px;
+    height: 163px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-container-modal {
+    width: 400px;
+    height: 300px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.item{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1rem;
+    width: 550px;
+    height: 200px;
+    border-radius: 30px;
+    background-color: #F2F2F2;
+    text-decoration: none; 
+    color: #212529
+}
+
+.text-area{
+    font-size: 20px;
+    font-family: 'Lato';
+    font-weight: 300;
+    margin-left: 1rem;
+    margin-bottom: 1.8rem;
+    margin-top: 30px;
+}
+
+.below-navbar{
+    padding-top: 5vh;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f24443;
+}
+
+.page_link:hover{
+    color: blue;    
+}
+
+.pizzaInfo--qtarea {
+    display:inline-flex;
+    background-color:#EEE;
+    border-radius:10px;
+    height:30px;
+}
+.pizzaInfo--qtarea button {
+    border:0;
+    background-color:transparent;
+    font-size:17px;
+    outline:0;
+    cursor:pointer;
+    padding:0px 10px;
+    color:#333;
+}
+.pizzaInfo--qt {
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0px 5px;
+    color:#000;
 }

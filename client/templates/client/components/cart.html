@@ -12,44 +12,127 @@
     <div class="offcanvas-body">
         <div>
             <div class="carrinho-components">
-                <p class="title-carrinho">Habib's Petrolina</p>
-                <p class="tipo-carrinho"><i class="fa-solid fa-cookie-bite"></i> Lanches ◍ 20 - 30min</p>
-                <p class="entrega-carrinho"><i class="fa-solid fa-bicycle" style="font-size:20px;"></i> Entrega e retirada no
-                    local</p>
-                <div class="estrelas">
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <i class="fa fa-star" style="font-size:25px;"></i>
-                    <span class="qtd-estrelas">4.0</span>
-                </div>
                 <div class="line-top-carrinho"></div>
-                <div class="produtos">
+                <div id="product-item" class="produtos" style="display: none">
                     <div class="item-carrinho">
                         <span class="descricao">8 BIB'SFIHAS CLÁSSICAS</span>
                         <span class="valor">R$ 19,90</span>
                     </div>
-                    <div class="item-carrinho">
-                        <span class="descricao">COCA-COLA 1L</span>
-                        <span class="valor">R$ 8,90</span>
+                </div>
+                <div id="all-products" style="width: 100%;"></div>
+                <div class="line-down-carrinho"></div>
+                
+                <div class="mb-4" style="width: 100%; background-color: #f7f5f5; border-radius: 10px; padding: 20px 30px;">
+                    <center><p class="subtotal" style="font-weight: 600;">Informações adicionais</p></center>
+                    <div class="group-buttons mb-4">
+                        <div class="form-check form-check-inline radio-padding radio-item">
+                            <input class="form-check-input" checked type="radio" name="delivery" id="no-delivery-radios" value="no">
+                            <label class="form-check-label" for="no-delivery-radios">Retirar no local</label>
+                        </div>
+                        
+                        <div class="form-check form-check-inline radio-padding radio-item">
+                            <input class="form-check-input" type="radio" name="delivery" id="yes-delivery-radio" value="yes">
+                            <label class="form-check-label" for="yes-delivery-radio">Entrega</label>
+                        </div>
+                    </div>
+    
+                    <center><p class="subtotal" style="font-weight: 600;">Forma de pagamento</p></center>
+                    <div class="group-buttons mb-2">
+                        <div class="form-check form-check-inline radio-padding radio-item">
+                            <input class="form-check-input" checked type="radio" name="payment_method" id="payment-radio" value="money">
+                            <label class="form-check-label" for="payment-radio">Dinheiro</label>
+                        </div>
+                        
+                        <div class="form-check form-check-inline radio-padding radio-item">
+                            <input class="form-check-input" type="radio" name="payment_method" id="card-radio" value="card">
+                            <label class="form-check-label" for="card-radio">Cartão</label>
+                        </div>
                     </div>
                 </div>
-                <div class="line-down-carrinho"></div>
+
                 <div class="area-subtotal">
                     <span class="subtotal">Subtotal</span>
-                    <span class="valor-subtotal">R$ 28,80</span>
+                    <span class="valor-subtotal">R$ 00,00</span>
                 </div>
-                <div class="area-entrega">
-                    <span class="entrega">Taxa de entrega</span>
-                    <span class="valor-entrega">R$ 8,90</span>
+                <div class="delivery-area" style="display: none; width: 100%;">
+                    <div class="area-entrega">
+                        <span class="entrega">Taxa de entrega</span>
+                        <span class="valor-entrega">R$ 8,90</span>
+                    </div>
                 </div>
                 <div class="area-total">
                     <span class="total">Total</span>
-                    <span class="valor-total">R$ 35,80</span>
+                    <span class="valor-total">R$ 00,00</span>
                 </div>
-                <button class="botao-pagamento">Pagamento</button>
+                <button class="botao-pagamento">Finalizar</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    const getCart = () => {
+        axios.get('/client/cart-all-info')
+            .then(response => {
+                const cartItems = response.data.cart;
+                addItemsToCart(cartItems);
+            });
+    };
+
+    const addItemsToCart = (cartItems) => {
+        const productItem = document.querySelector('#product-item');
+        const products = document.querySelector('#all-products');
+        products.innerHTML = '';
+
+        cartItems.forEach(item => {
+            const currentItem = productItem.cloneNode(true);
+            currentItem.querySelector('.descricao').innerHTML = `
+                <span class='badge bg-danger me-2'>x${item.quantity}</span>
+                ${item.name.toUpperCase()}
+            `;
+            let price = item.price.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+            currentItem.querySelector('.valor').innerHTML = `R$ ${price}`;
+            currentItem.style.display = 'block';
+            products.appendChild(currentItem);
+        });
+
+        let subTotalPrice = cartItems.reduce((sum, item) => {
+            return sum + (item.price * item.quantity);;
+        }, 0);
+
+        subTotalPrice = subTotalPrice.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2, maximumFractionDigits: 2
+        });
+
+        document.querySelector('.valor-subtotal').innerHTML = `R$ ${subTotalPrice}`;
+        document.querySelector('.valor-total').innerHTML = `R$ ${subTotalPrice}`;
+    };
+
+    const deliveryRadio = document.querySelectorAll('input[name="delivery"]');
+    const paymentRadio = document.querySelector('input[name="payment_method"]:checked');
+
+    deliveryRadio.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                const delivery = document.querySelector('.delivery-area');
+                if (checkbox.value === 'yes') {
+                    delivery.style.display = 'block';
+                    let total = document.querySelector('.valor-subtotal').innerHTML;
+                    total = parseFloat(total.replace('R$ ', '').replace(',', '.'));
+
+                    let frete = document.querySelector('.valor-entrega').innerHTML;
+                    frete = parseFloat(frete.replace('R$ ', '').replace(',', '.'));
+
+                    total = (total + frete).toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2, maximumFractionDigits: 2
+                    });
+                    document.querySelector('.valor-total').innerHTML = `R$ ${total}`;
+                } else {
+                    delivery.style.display = 'none';
+                }
+            }
+        });
+    });
+</script>

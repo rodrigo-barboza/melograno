@@ -1,10 +1,86 @@
 {% extends 'client/layouts/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %} Peça agora! {% endblock %}
 
 {% block content %}
 
-    CONTEÚDO AQUI!
+    <link href="{% static 'client/css/my-orders.css' %}" rel="stylesheet">
+    <nav class="navbar navbar-light" style="background-color: #f24443;">
+        <a class="navbar-brand">
+          <div class="sub-navbar">Meus Pedidos</div>
+        </a>
+    </nav>
+
+    <div class="blank-space"></div>
+
+    <!-- for item in meus pedidos: -->
+    {% if page_obj %}
+    <div class="page_content">
+      <div class="grid_flex_body order_section">
+        {% for order in page_obj.object_list %}
+        <div class="card w-25 order_margin">
+            <div class="card-body">
+              <h5 class="card-title">{{order.plate_id.establishment_id.name}}</h5>
+              <p class="card-text adress-txt">{{order.address_id.street}}, {{order.address_id.district}}</p>
+              <p class="card-text adress-txt">{{order.send_time|naturaltime}}</p>
+              <hr>
+              <!-- for item in ORDER: Div Flex Start order_name flex end order_price -->
+              <!-- Fazer outro elemento no DICIONÁRIO do request e pegar por lá -->
+              {% for plates in order.plates %}
+              <div class="grid_flex">
+                <p class="item_grid">{{plates.name}}</p>
+                <p class="price">{{plates.price}}</p>
+              </div>
+              {% endfor %}
+              <!-- <div class="grid_flex"> EXEMPLO
+                <p class="item">Batatinha Frita Show de bola</p>
+                <p class="price">13,80</p>
+              </div>-->
+              <hr>
+              <!-- Aqui embaixo vai o preço, taxa de entrega e total -->
+              <div class="grid_flex">
+                <p class="item_grid">Total dos pedidos</p>
+                <p class="price">{{order.price}}</p>
+              </div>
+              <div class="grid_flex">
+                <p class="item_grid">Taxa de Entrega</p>
+                <p class="price">5,00</p>
+              </div>
+              <div class="grid_flex">
+                <p class="item-total">Total</p>
+                <p class="price-total">{{order.price}} + 5</p>
+              </div>
+              <a href="#" class="btn evaluate">Avaliar 🟊</a>
+            </div>
+        </div>
+        {% endfor %}     
+      </div>
+      <div class="pagination below-navbar">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="page_link" href="?page=1">&laquo; Primeira</a>
+                <a class="page_link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+        
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+          
+            {% if page_obj.has_next %}
+                <a class="page_link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                <a class="page_link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </span>
+      </div>   
+    </div>
+
+    {% else %}
+    <div class="empty_state">
+      <p>Não há nada aqui!</p>
+      <img src="{% static 'client/images/empty-state.png' %}" alt="Vazio">
+    </div>
+    {% endif %}
 
 {% endblock %}

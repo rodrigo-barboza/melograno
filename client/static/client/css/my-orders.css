@@ -1,0 +1,92 @@
+body {
+    margin: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+.sub-navbar{
+    padding-left: 5vh;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+}
+
+.below-navbar{
+    padding-top: 5vh;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f24443;
+}
+
+.blank-space{
+    padding-bottom: 5vh;
+}
+
+.evaluate{
+    background-color: #f24443;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.adress-txt{
+    font-size: 14px;
+}
+
+.grid_flex{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.order_margin{
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.grid_flex_body{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+}
+
+.item_grid, .item-total{
+    font-size: 16px;
+}
+
+.price, .price-total{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.item-total, .price-total{
+    color: #f24443;
+}
+
+.order_section{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.empty_state, .below-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty_state p{
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.page_link:hover{
+    color: blue;    
+}
