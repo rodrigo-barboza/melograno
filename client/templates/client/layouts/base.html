@@ -98,7 +98,11 @@
     const getCartCount = () => {
         axios.get('/client/cart-info')
             .then(response => {
-                cartItemsCount.innerHTML = response.data.cart.length;
+                if (response.data.message === 'success') {
+                    cartItemsCount.innerHTML = response.data.cart.length;
+                } else {
+                    cartItemsCount.innerHTML = '0';
+                }
             });
     };
 

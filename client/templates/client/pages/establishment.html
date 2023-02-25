@@ -112,6 +112,7 @@
 
     modal.addEventListener('show.bs.modal', (item) => {
         const item_id = item.relatedTarget.getAttribute('data-id');
+        document.querySelector('.pizzaInfo--qt').innerHTML = 1;
         
         axios.get(`/client/plate/${item_id}`)
             .then(response => {
@@ -126,7 +127,10 @@
         const itemImage = document.querySelector('#item-img');
 
         itemTitle.innerHTML = item.name;
-        itemPrice.innerHTML = `R$ ${item.price.toString().replace('.', ',')}`;
+        let price = item.price.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2, maximumFractionDigits: 2
+        });
+        itemPrice.innerHTML = `R$ ${price}`;
         itemDescription.innerHTML = item.description;
         itemImage.style.background = `url(${item.image}) no-repeat`
         itemImage.style.backgroundSize = 'contain';
@@ -143,7 +147,6 @@
 
         currentPlate.total_item = currentPrice;
         currentPlate.quantity = currentPrice / currentPlate.price;
-        console.log(currentPlate);
 
         axios.post('/client/cart/add-item', {
             'current_plate': currentPlate,

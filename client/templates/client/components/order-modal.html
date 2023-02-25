@@ -76,6 +76,9 @@
     let currentPrice = currentAmount * price;
 
     const buttonPrice = document.querySelector('#current-price');
-    buttonPrice.innerHTML = `R$ ${currentPrice.toString().replace('.', ',')}`;
+    currentPrice = parseFloat(currentPrice).toLocaleString('pt-BR', {
+        minimumFractionDigits: 2, maximumFractionDigits: 2
+    });
+    buttonPrice.innerHTML = `R$ ${currentPrice}`;
   };
 </script>

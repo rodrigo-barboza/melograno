@@ -20,9 +20,27 @@
                     </div>
                 </div>
                 <div id="all-products" style="width: 100%;"></div>
+
+                <div style="width: 100% ;" class="d-flex justify-content-center align-items-center flex-column">
+                    <div 
+                        id="cart-empty-state" 
+                        class="cart-empty" 
+                    >
+                        <img src="{% static 'client/images/empty-cart.png' %}" width="150">
+                        <div class="mt-4 text-muted">Seu carrinho está vazio</div>
+                    </div>
+                </div>
+                <div
+                    id="clear-cart-button"
+                    class="align-self-center" 
+                    style="color: rgb(199, 58, 58); text-decoration: underline; cursor: pointer;"
+                    onclick="clearCart()"
+                >
+                    Esvaziar carrinho
+                </div>
                 <div class="line-down-carrinho"></div>
                 
-                <div class="mb-4" style="width: 100%; background-color: #f7f5f5; border-radius: 10px; padding: 20px 30px;">
+                <div id="additional-info" class="mb-4" style="width: 100%; background-color: #f7f5f5; border-radius: 10px; padding: 20px 30px;">
                     <center><p class="subtotal" style="font-weight: 600;">Informações adicionais</p></center>
                     <div class="group-buttons mb-4">
                         <div class="form-check form-check-inline radio-padding radio-item">
@@ -64,7 +82,7 @@
                     <span class="total">Total</span>
                     <span class="valor-total">R$ 00,00</span>
                 </div>
-                <button class="botao-pagamento">Finalizar</button>
+                <button class="botao-pagamento" onclick="createOrder()">Finalizar</button>
             </div>
         </div>
     </div>
@@ -82,32 +100,50 @@
     const addItemsToCart = (cartItems) => {
         const productItem = document.querySelector('#product-item');
         const products = document.querySelector('#all-products');
+        const additionalInfo = document.querySelector('#additional-info');
+        const clearCartButton = document.querySelector('#clear-cart-button');
+        const cartEmptyState = document.querySelector('#cart-empty-state');
+
         products.innerHTML = '';
 
-        cartItems.forEach(item => {
-            const currentItem = productItem.cloneNode(true);
-            currentItem.querySelector('.descricao').innerHTML = `
-                <span class='badge bg-danger me-2'>x${item.quantity}</span>
-                ${item.name.toUpperCase()}
-            `;
-            let price = item.price.toLocaleString('pt-BR', {
+        if (cartItems?.length > 0) {
+            additionalInfo.style.display = 'block';
+            clearCartButton.style.display = 'block';
+            cartEmptyState.classList.remove('cart-empty-show');
+            cartEmptyState.classList.add('cart-empty');
+
+            cartItems.forEach(item => {
+                const currentItem = productItem.cloneNode(true);
+                currentItem.querySelector('.descricao').innerHTML = `
+                    <span class='badge bg-danger me-2'>x${item.quantity}</span>
+                    ${item.name.toUpperCase()}
+                `;
+                let price = item.price.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2, maximumFractionDigits: 2
+                });
+                currentItem.querySelector('.valor').innerHTML = `R$ ${price}`;
+                currentItem.style.display = 'block';
+                products.appendChild(currentItem);
+            });
+    
+            let subTotalPrice = cartItems.reduce((sum, item) => {
+                return sum + (item.price * item.quantity);;
+            }, 0);
+    
+            subTotalPrice = subTotalPrice.toLocaleString('pt-BR', {
                 minimumFractionDigits: 2, maximumFractionDigits: 2
             });
-            currentItem.querySelector('.valor').innerHTML = `R$ ${price}`;
-            currentItem.style.display = 'block';
-            products.appendChild(currentItem);
-        });
-
-        let subTotalPrice = cartItems.reduce((sum, item) => {
-            return sum + (item.price * item.quantity);;
-        }, 0);
-
-        subTotalPrice = subTotalPrice.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2, maximumFractionDigits: 2
-        });
-
-        document.querySelector('.valor-subtotal').innerHTML = `R$ ${subTotalPrice}`;
-        document.querySelector('.valor-total').innerHTML = `R$ ${subTotalPrice}`;
+    
+            document.querySelector('.valor-subtotal').innerHTML = `R$ ${subTotalPrice}`;
+            document.querySelector('.valor-total').innerHTML = `R$ ${subTotalPrice}`;
+        } else {
+            additionalInfo.style.display = 'none';
+            clearCartButton.style.display = 'none';
+            cartEmptyState.classList.remove('cart-empty');
+            cartEmptyState.classList.add('cart-empty-show');
+            document.querySelector('.valor-subtotal').innerHTML = `R$ 00,00`;
+            document.querySelector('.valor-total').innerHTML = `R$ 00,00`;
+        }
     };
 
     const deliveryRadio = document.querySelectorAll('input[name="delivery"]');
@@ -131,8 +167,51 @@
                     document.querySelector('.valor-total').innerHTML = `R$ ${total}`;
                 } else {
                     delivery.style.display = 'none';
+                    let total = document.querySelector('.valor-subtotal').innerHTML;
+                    total = parseFloat(total.replace('R$ ', '').replace(',', '.'));
+
+                    total = total.toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2, maximumFractionDigits: 2
+                    });
+
+                    document.querySelector('.valor-total').innerHTML = `R$ ${total}`;
                 }
             }
         });
     });
+
+    const clearCart = () => {
+        
+        Swal.fire({
+            title: 'Deseja mesmo esvaziar seu carrinho?',
+            text: 'Todos os itens serão removidos',
+            icon: 'warning',
+            confirmButtonText: 'Esvaziar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#146C43',
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/client/clear-cart')
+                    .then(response => {
+                        getCart();
+                        getCartCount();
+                    });
+            }
+        });
+    };
+
+    const createOrder = () => {
+        const deliveryR = document.querySelector('input[name="delivery"]:checked');
+        const paymentR = document.querySelector('input[name="payment_method"]:checked');
+
+        axios.post('/client/order/create', {
+            'delivery': deliveryR.value,
+            'payment_method': paymentR.value,
+        }).then(response => {
+            console.log(response.data);
+            getCart();
+            getCartCount();
+        })
+    };
 </script>

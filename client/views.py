@@ -6,6 +6,8 @@ from django.forms.models import model_to_dict
 from guest.models import User, Order, Plate, Cart, Establishment, Menu, CartItem, OrderItem
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
+from datetime import timedelta
+from django.utils import timezone
 import random
 import json
 
@@ -231,6 +233,7 @@ def get_cart_count(request):
 	).all()
 
 	return JsonResponse({
+		'message': 'success',
 		'cart': list(cart_items.values())
 	}, status=200)
 
@@ -275,3 +278,54 @@ def get_cart_plates(cart_items):
 		})
 
 	return plates
+
+@csrf_exempt
+def clear_cart(request):
+	user_cart = Cart.objects.filter(
+		user_id=request.user.user_id
+	).first()
+
+	user_cart.delete()
+
+	return JsonResponse({
+		'message': 'Carrinho esvaziado'
+	}, status=200)
+
+
+@csrf_exempt
+def create_order(request):
+	user_cart = Cart.objects.filter(
+		user_id=request.user.user_id
+	).first()
+
+	order_info = json.loads(request.body)
+	print(order_info)
+	is_delivery = True if order_info['delivery'] == 'yes' else False
+	payment_method = order_info['payment_method']
+	print(payment_method)
+
+	order = Order.objects.create(
+		user_id=request.user,
+		delivery=is_delivery,
+		price=0,
+		send_time=timezone.now(),
+		payment_method=payment_method,
+	)
+
+	cart_items = CartItem.objects.filter(cart_id=user_cart).all()
+	create_order_items(cart_items, order)
+
+	user_cart.delete()
+
+	return JsonResponse({
+		'message': 'Pedido realizado com sucesso!'
+	}, status=200)
+
+
+def create_order_items(cart_items, order):
+	for item in cart_items:
+		OrderItem.objects.create(
+			order_id=order,
+			plate_id=item.plate_id,
+			quantity=item.quantity
+		)
