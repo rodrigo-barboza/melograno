@@ -13,6 +13,7 @@ owner_required = user_passes_test(is_owner, login_url='/guest/login')
 urlpatterns = [
 	path('', owner_required(views.index), name='index'),
 	path('establishment-details', owner_required(views.establishment_details), name='establishment_details'),
+	path('add-establishment-info', owner_required(views.set_establishment_info), name='set_establishment_info'),
 	path('add_product', owner_required(views.add_product), name='add_product'),
 	# rotas das páginas
 	path('products', owner_required(views.establishment_products), name='establishment_products'),

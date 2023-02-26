@@ -46,7 +46,7 @@ class Establishment(models.Model):
     delivery = models.BooleanField(default=False)
     opens_at = models.TimeField()
     closes_at = models.TimeField()
-    image = models.CharField(max_length=100)
+    image = models.FileField(upload_to='imagens/')
     address_id = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
 
 class User(AbstractUser):
@@ -57,6 +57,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=50)
     establishment_id = models.ForeignKey(Establishment, on_delete=models.CASCADE, null=True)
     state = models.CharField(choices=STATES, max_length=15)
+    first_login = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
