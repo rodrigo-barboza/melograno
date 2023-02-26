@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.middleware import csrf
 from django.http import JsonResponse
 from social_django.models import UserSocialAuth
 from django.forms.models import model_to_dict
@@ -8,6 +9,7 @@ from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from datetime import timedelta
 from django.utils import timezone
+from functools import reduce
 import random
 import json
 
@@ -31,7 +33,7 @@ def establishment(request, establishment_id):
 
 def my_orders(request):
 	user_id = request.user.user_id
-	order_list = Order.objects.filter(user_id=user_id).all()
+	order_list = Order.objects.filter(user_id=user_id).all().order_by('-send_time')
 	for order in order_list:
 		allPlates = OrderItem.objects.filter(order_id = order.order_id).all()
 		aux = []
@@ -299,20 +301,25 @@ def create_order(request):
 	).first()
 
 	order_info = json.loads(request.body)
-	print(order_info)
+
 	is_delivery = True if order_info['delivery'] == 'yes' else False
 	payment_method = order_info['payment_method']
-	print(payment_method)
+
+
+	cart_items = CartItem.objects.filter(cart_id=user_cart).all()
+	
+	establishment_id = get_establishment_id(cart_items)
+	order_price = get_order_price(cart_items)
 
 	order = Order.objects.create(
 		user_id=request.user,
+		establishment_id=establishment_id,
 		delivery=is_delivery,
-		price=0,
+		price=order_price,
 		send_time=timezone.now(),
 		payment_method=payment_method,
 	)
 
-	cart_items = CartItem.objects.filter(cart_id=user_cart).all()
 	create_order_items(cart_items, order)
 
 	user_cart.delete()
@@ -329,3 +336,37 @@ def create_order_items(cart_items, order):
 			plate_id=item.plate_id,
 			quantity=item.quantity
 		)
+
+def get_establishment_id(cart_items):
+	plate = cart_items[0].plate_id
+	plate = Plate.objects.filter(plate_id=plate.plate_id).first()
+	menu = Menu.objects.filter(menu_id=plate.menu_id.menu_id).first()
+	return menu.establishment_id
+
+def get_order_price(cart_items):
+	price = 0.00
+
+	for item in cart_items:
+		plate = Plate.objects.filter(plate_id=item.plate_id.plate_id).first()
+		price += plate.price * item.quantity
+
+	return price
+
+def establishment_filter(request):
+	context = {'csrf_token': csrf.get_token(request)}
+	filter = request.POST['establishment_filter']
+	establishment = get_filtered_establishment(filter)
+
+	if establishment:
+		return redirect('client:establishment', establishment.establishment_id)
+
+	return render(request, 'client/pages/not-found.html')
+
+
+def get_filtered_establishment(filter):
+	establishments = Establishment.objects.all()
+
+	for establishment in establishments:
+		print(str(filter).lower(),  establishment.name.lower())
+		if str(filter).lower() in establishment.name.lower():
+			return establishment

@@ -11,19 +11,13 @@
             </span>
             <span class="slogan-text--red">Melograno!</span>
             <div id="search" class="mt-4">
-                <span class="search-icon">
-                    <img 
-                        src="{% static 'guest/images/search-icon.png' %}"
-                        width="33" 
-                        alt=""
-                    >
-                </span>
-                <input 
-                    class="custom-input"
-                    style="width: 450px;"
-                    type="text"
-                    placeholder="Procure restaurantes, lojas..."
-                />
+                <form action="{% url 'client:establishment_filter' %}" method="post">
+                    {% csrf_token %}
+                    <button class="search-icon" type="submit" style="border: none">
+                        <img src="{% static 'guest/images/search-icon.png' %}" width="33">
+                    </button>
+                    <input class="custom-input" style="width: 450px;" name="establishment_filter" type="text" placeholder="Procure restaurantes, lojas..." />
+                </form>
             </div>
         </div>
         <div class="col-md-5 d-flex justify-content-end">

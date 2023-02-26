@@ -22,4 +22,5 @@ urlpatterns = [
 	path('cart-all-info', client_required(views.get_cart), name='get_cart'),
 	path('clear-cart', client_required(views.clear_cart), name='clear_cart'),
 	path('order/create', client_required(views.create_order), name='create_order'),
+	path('filter/establishment', client_required(views.establishment_filter), name='establishment_filter'),
 ]
