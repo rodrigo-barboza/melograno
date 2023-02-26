@@ -7,9 +7,7 @@ from django.forms.models import model_to_dict
 from guest.models import User, Order, Plate, Cart, Establishment, Menu, CartItem, OrderItem
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
-from datetime import timedelta
 from django.utils import timezone
-from functools import reduce
 import random
 import json
 
