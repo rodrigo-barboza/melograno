@@ -8,6 +8,8 @@ import random
 import json
 from guest.models import User, Establishment, Plate, Order, OrderItem, Address
 from django.core.paginator import Paginator
+from .models import Product
+from .forms import ProductForm
 
 def index(request):
 	return redirect('owner:establishment_products')
@@ -15,11 +17,24 @@ def index(request):
 def establishment_details(request):
 	return render(request, 'owner/establishment-signup.html')
 
-def add_product(request):
-	return render(request, 'owner/components/add-product-modal.html')
-
 def establishment_products(request):
-	return render(request, 'owner/pages/products.html')
+	products = Product.objects.all()
+	return render(request, 'owner/pages/products.html', {'products': products})
+
+def add_product(request):
+    if str(request.method) == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            print('hello1')  # adicionado para verificar se os dados estão sendo recebidos corretamente
+            form.save()
+            return redirect('establishment_products')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+            print('Form is invalid:', form.errors)
+    else:
+        form = ProductForm()
+    return redirect('owner:establishment_products')
+
 
 def order_history(request):
 	mainEstablishment = request.user.establishment_id #daqui tá vindo o estabelecimento já de ctz

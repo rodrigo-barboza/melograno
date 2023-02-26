@@ -12,40 +12,45 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
 </head>
 <body>
-    <div class="modal-ex">
-        <div class="modal-content-ex">
-            <div class="add-product-header">
-                <h5>Adicionar um novo produto</h5>
-                <i class="ph-x" id="fechar-modal"></i>
+    <form method="post" action="{% url 'owner:add_product' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="modal-ex">
+            <div class="modal-content-ex">
+                <div class="add-product-header">
+                    <h5>Adicionar um novo produto</h5>
+                    <i class="ph-x" id="fechar-modal"></i>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Imagem do produto</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nome do produto</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Descrição do produto</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Preço</label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <label for="exampleInputEmail1" class="form-label">Categoria</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>escolha uma categoria</option>
+                    <option value="1">Mexicana</option>
+                    <option value="2">Saudável</option>
+                    <option value="3">Brasileira</option>
+                    <option value="4">Japonesa</option>
+                    <option value="5">Italiana</option>
+                  </select>
+                  <div class="add-product-footer">
+                    <button type="submit" class="add-btn">Adicionar produto</button>
+                  </div>
             </div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Imagem do produto</label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nome do produto</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Descrição do produto</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Preço</label>
-                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <label for="exampleInputEmail1" class="form-label">Categoria</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>escolha uma categoria</option>
-                <option value="1">Comida Brasileira</option>
-                <option value="2">Comida Árabe</option>
-                <option value="3">Comida Mexicana</option>
-                <option value="4">Comida Japonesa</option>
-              </select>
-              <div class="add-product-footer">
-                <button class="add-btn">Adicionar produto</button>
-              </div>
         </div>
-      </div>
+    </form>
 </body>
 </html>
