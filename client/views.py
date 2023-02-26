@@ -47,7 +47,9 @@ def my_orders(request):
 	return render(request, 'client/pages/my-orders.html', context)
 
 def profile(request):
-	return render(request, 'client/pages/profile.html')
+	user_id = request.user
+	context = {'user_info': user_id}
+	return render(request, 'client/pages/profile.html', context)
 
 def category(request, category):
 	context = {}

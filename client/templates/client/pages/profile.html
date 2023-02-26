@@ -8,14 +8,14 @@ Peça agora! {% endblock %} {% block content %}
 
 <div class="client-info" style="margin-right: 50px;">
   <div class="client-text-description">
-    <div class="client-name">Francisco Luan Ramos</div>
+    <div class="client-name">{{user_info.username}}</div>
     <div class="client-adress">
       Travessa São Miguel, apto 3a, SantoAntônio - Juazeiro, BA
     </div>
     <div class="client-form">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <input type="text" class="form-control" id="exampleFormControlInput1" value="{{user_info.username}}"/>
       </div>
 
       <div class="mb-3">
@@ -25,6 +25,7 @@ Peça agora! {% endblock %} {% block content %}
           class="form-control"
           id="exampleFormControlInput1"
           placeholder="meuemail@exemplo.com"
+          value="user_info.email"
         />
       </div>
 
