@@ -10,7 +10,7 @@ from guest.models import User, Establishment, Plate, Order, OrderItem, Address, 
 from django.core.paginator import Paginator
 
 def index(request):
-	return redirect('owner:establishment_products2')
+	return redirect('owner:establishment_products')
 
 def establishment_details(request):
 	return render(request, 'owner/establishment-signup.html')
