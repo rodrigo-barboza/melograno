@@ -20,13 +20,13 @@ const categoriesSlider = [
     {   
         id: 4,
         category: 'Japonesa',
-        image: '/static/client/images/categories/mexican.png',
+        image: '/static/client/images/categories/japanese.png',
         url: 'category/japanese',
     },
     {   
         id: 5,
         category: 'Italiana',
-        image: '/static/client/images/categories/saudavel.png',
+        image: '/static/client/images/categories/italian.png',
         url: 'category/italian',
     }
 ];
