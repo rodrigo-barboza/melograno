@@ -92,3 +92,23 @@ header {
 #current-page{
     color: #F34444;
 }
+
+.empty_state, .below-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty_state p{
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.blank-space{
+    padding-bottom: 5vh;
+}
+
+.page_link:hover{
+    color: blue;    
+}

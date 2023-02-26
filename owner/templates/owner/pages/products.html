@@ -17,69 +17,53 @@
     </button>
 </header>
 
-
+{% if page_obj %}
 <div class="body-content">
+    {% for plate in page_obj.object_list %}
     <div class="products">
-        <h4 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h4>
+        <h4 class="product-title">{{plate.name}}</h4>
 
         <p class="product-text-description">
-            Faça as contas e economize! Escolha 8 Bib’sfihas nos sabores de:
-            Carne, Calabresa com Mussarela ou Frango. Peça já!
+            {{plate.description}}
         </p>
         <div class="product-footer">
-            <h5 class="product-text-price" style="color: #00d22e">R$ 19,90</h5>
+            <h5 class="product-text-price" style="color: #00d22e">R$ {{plate.price}}</h5>
             <div class="product-tag">
-                <h6>Comida Árabe</h6>
+                <h6>{{plate.category}}</h6>
             </div>
         </div>
     </div>
-
-    <div class="products">
-        <h4 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h4>
-
-        <p class="product-text-description">
-            Faça as contas e economize! Escolha 8 Bib’sfihas nos sabores de:
-            Carne, Calabresa com Mussarela ou Frango. Peça já!
-        </p>
-        <div class="product-footer">
-            <h5 class="product-text-price" style="color: #00d22e">R$ 19,90</h5>
-            <div class="product-tag">
-                <h6>Comida Árabe</h6>
-            </div>
-        </div>
-    </div>
-
-    <div class="products">
-        <h4 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h4>
-
-        <p class="product-text-description">
-            Faça as contas e economize! Escolha 8 Bib’sfihas nos sabores de:
-            Carne, Calabresa com Mussarela ou Frango. Peça já!
-        </p>
-        <div class="product-footer">
-            <h5 class="product-text-price" style="color: #00d22e">R$ 19,90</h5>
-            <div class="product-tag">
-                <h6>Comida Árabe</h6>
-            </div>
-        </div>
-    </div>
-
-    <div class="products">
-        <h4 class="product-title">8 BIB’SFIHAS CLÁSSICAS</h4>
-
-        <p class="product-text-description">
-            Faça as contas e economize! Escolha 8 Bib’sfihas nos sabores de:
-            Carne, Calabresa com Mussarela ou Frango. Peça já!
-        </p>
-        <div class="product-footer">
-            <h5 class="product-text-price" style="color: #00d22e">R$ 19,90</h5>
-            <div class="product-tag">
-                <h6>Comida Árabe</h6>
-            </div>
-        </div>
+    {% endfor %}
+</div>
+<div class="blank-space"></div>
+<div>
+    <div class="pagination below-navbar">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="page_link" href="?page=1">&laquo; Primeira</a>
+                <a class="page_link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+        
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+          
+            {% if page_obj.has_next %}
+                <a class="page_link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                <a class="page_link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </span>
     </div>
 </div>
 
+{% else %}
+<div class="body-content">
+    <div class="empty_state">
+        <p>Não há nada aqui!</p>
+        <img src="{% static 'owner/images/empty-state.png' %}" alt="Vazio">
+    </div>
+</div>
+{% endif %}
 
 <script>
     var modal = document.querySelector(".modal-ex");
