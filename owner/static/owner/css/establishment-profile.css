@@ -1,0 +1,57 @@
+.my-profile {
+    width: 1250px;
+    height: 112px;
+    background: #F34444;
+    border-radius: 11.073px 11.073px 0px 0px;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30.2653px;
+}
+
+.owner-info {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.owner-name {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30.2653px;
+    color: #1E1E1E;
+    margin-bottom: 20px;
+}
+
+.mb-3 {
+    width: 455.4px;
+}
+
+.owner-form {
+    margin-top: 50px;
+}
+
+.address-title {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20.2653px;
+    color: #1E1E1E;
+    margin-top: 50px;
+    margin-bottom: 30px;
+
+}
+
+.logo{
+    border-color: #1E1E1E;
+    width:400px;
+    height:400px;
+}

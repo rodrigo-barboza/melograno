@@ -6,7 +6,7 @@ from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 import random
 import json
-from guest.models import User, Establishment, Plate, Order, OrderItem
+from guest.models import User, Establishment, Plate, Order, OrderItem, Address
 from django.core.paginator import Paginator
 
 def index(request):
@@ -42,5 +42,7 @@ def orders(request):
 	return render(request, 'owner/pages/orders.html')
 
 def establishment_profile(request):
-	return render(request, 'owner/pages/establishment-profile.html')
+	mainEstablishment = request.user.establishment_id
+	context = {'info':mainEstablishment}
+	return render(request, 'owner/pages/establishment-profile.html', context)
 
