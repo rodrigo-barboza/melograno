@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
   }
   
   .lado1{
@@ -13,7 +13,6 @@
   
   .lado2{
     background-color: rgba(222, 222, 222, 0.38);
-    height: 100vh;
   }
   
   .img-logo{
@@ -133,7 +132,8 @@
   }
   
   .input2{
-    padding-left: 8rem;
+    margin-top: 5px;
+    padding-right: 8rem;
   }
   
   .user-type-text{
