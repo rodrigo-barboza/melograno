@@ -45,7 +45,6 @@ Protego==0.2.1
 pure-eval==0.2.2
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-PyAudio @ file:///C:/Users/Rodrigo/Downloads/PyAudio-0.2.11-cp310-cp310-win_amd64.whl
 pycparser==2.21
 PyDispatcher==2.0.5
 Pygments==2.13.0
