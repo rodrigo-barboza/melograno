@@ -39,7 +39,6 @@ a:hover {
     background-color: white;
     flex-direction: column;
     border-radius: 17px;
-    height: 490px;
     width: 420px;
 }
 
@@ -198,3 +197,18 @@ a:hover {
     border-radius: 14px;
 }
 
+.empty_state, .below-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.empty_state p{
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.page_link:hover{
+    color: blue;    
+}
