@@ -10,7 +10,7 @@
 
 <div class="d-flex justify-content-between">
     <a class="item">
-        <div class="image-container" style="background-image: url('{{ establishment.image }}')"></div>
+        <div class="image-container" style="background-image: url('{% static "guest/images/" %}{{establishment.image}}')"></div>
         <div class="text-area">
             <p class="nome-estabelecimento">{{ establishment.name }} </p>
             <p class="time">
@@ -46,7 +46,7 @@
                 data-id="{{ plate.plate_id }}"
             >
                 <div class="product-body-image">
-                    <div class="image-container" style="background-image: url('{{ plate.image }}')"></div>
+                    <div class="image-container" style="background-image: url('{% static "guest/images/" %}{{plate.image}}')"></div>
                 </div>
                 <div class="product-body-text">
                     <h2 class="product-title">{{ plate.name }}</h2>
@@ -72,7 +72,7 @@
                 data-id="{{ drink.plate_id }}"
             >
                 <div class="product-body-image">
-                    <div class="image-container" style="background-image: url('{{ drink.image }}')"></div>
+                    <div class="image-container" style="background-image: url('{% static "guest/images/" %}{{drink.image}}')"></div>
                 </div>
                 <div class="product-body-text">
                     <h2 class="product-title">{{ drink.name }}</h2>
@@ -132,7 +132,7 @@
         });
         itemPrice.innerHTML = `R$ ${price}`;
         itemDescription.innerHTML = item.description;
-        itemImage.style.background = `url(${item.image}) no-repeat`
+        itemImage.style.background = `url('/static/guest/images/${item.image}') no-repeat`
         itemImage.style.backgroundSize = 'contain';
         itemImage.style.backgroundPosition = 'center';
 

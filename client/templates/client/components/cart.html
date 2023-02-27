@@ -209,9 +209,22 @@
             'delivery': deliveryR.value,
             'payment_method': paymentR.value,
         }).then(response => {
-            console.log(response.data);
+            setAlert('success', {
+                title: response.data.message,
+                text: 'Acompanhe o seu pedido na tela de "meus pedidos"'
+            });
             getCart();
             getCartCount();
         })
+    };
+
+    const setAlert = (type, { title, text }) => {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: type,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#F34444',
+        });
     };
 </script>

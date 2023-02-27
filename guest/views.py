@@ -18,9 +18,18 @@ import json
 
 def login(request):
 	if request.user.is_authenticated:
+		if is_social_user(request.user):
+			return redirect('client:index')
 		return redirect(f'{request.user.role}:index')
 
-	return render(request, 'guest/login.html')	
+	return render(request, 'guest/login.html')
+
+def is_social_user(request_user):
+	has_user = UserSocialAuth.objects.filter(
+		user=request_user
+	).exists()
+
+	return True if has_user else False
 
 def user_logout(request):
 	logout(request)
@@ -31,7 +40,7 @@ def user_google_login(request):
 	if user_already_registered(request):
 		user = authenticate_social_user(request)
 		auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-		return render(request, 'client/index.html')
+		return redirect('client:index')
 
 	messages.error(request, 'Credenciais inválidas')
 	return redirect('login')

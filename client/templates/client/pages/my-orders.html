@@ -5,6 +5,7 @@
 {% block title %} Peça agora! {% endblock %}
 
 {% block content %}
+{% include 'client/components/rate-modal.html' %}
 
     <link href="{% static 'client/css/my-orders.css' %}" rel="stylesheet">
     <nav class="navbar navbar-light" style="background-color: #f24443;">
@@ -45,14 +46,16 @@
                 <p class="price">{{order.price}}</p>
               </div>
               <div class="grid_flex">
-                <p class="item_grid">Taxa de Entrega</p>
-                <p class="price">5,00</p>
+                {% if order.delivery %}
+                  <p class="item_grid">Taxa de Entrega</p>
+                  <p class="price">8,90</p>
+                {% endif %}
               </div>
               <div class="grid_flex">
                 <p class="item-total">Total</p>
-                <p class="price-total">{{order.price}} + 5</p>
+                <p class="price-total">{{order.price}}{% if order.delivery %} + 8,90{% endif %}</p>
               </div>
-              <a href="#" class="btn evaluate">Avaliar 🟊</a>
+              <a href="#" class="btn evaluate" data-bs-toggle="modal" data-bs-target="#rate-modal">Avaliar 🟊</a>
             </div>
         </div>
         {% endfor %}     
@@ -78,8 +81,8 @@
 
     {% else %}
     <div class="empty_state">
-      <p>Não há nada aqui!</p>
-      <img src="{% static 'client/images/empty-state.png' %}" alt="Vazio">
+      <p style="font-weight: 400; font-size: 40px;">Não há nada aqui!</p>
+      <img style="width: 400px; height: auto;" src="{% static 'client/images/empty-state.png' %}" alt="Vazio">
     </div>
     {% endif %}
 
