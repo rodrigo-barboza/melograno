@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-*c)d-g-h1vakpkf%()nzluz202y+x_^z$u*j*@r2_skd6c&-ld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://melograno-production.up.railway.app/', '192.168.100.120', '192.168.56.120', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['melograno-production.up.railway.app', '192.168.100.120', '192.168.56.120', 'localhost', '127.0.0.1']
 
 
 # Application definition
