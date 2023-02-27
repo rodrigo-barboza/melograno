@@ -51,7 +51,20 @@ def order_history(request):
 	#return render(request, 'owner/pages/order-history.html')
 
 def orders(request):
-	return render(request, 'owner/pages/orders.html')
+	mainEstablishment = request.user.establishment_id
+	allOrders = Order.objects.filter(establishment_id=mainEstablishment.establishment_id).all()
+	for order in allOrders:
+		if order.status == 'waiting':
+			allPlates = OrderItem.objects.filter(order_id = order.order_id).all()
+			aux = []
+			for item in allPlates:
+				aux += Plate.objects.filter(plate_id = item.plate_id.plate_id).all()
+			order.plates = aux
+	paginator = Paginator(allOrders, 3) # Mostra até 3 pedidos por página
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+	context = {'page_obj': page_obj}
+	return render(request, 'owner/pages/orders.html', context)
 
 def establishment_profile(request):
 	mainEstablishment = request.user.establishment_id
