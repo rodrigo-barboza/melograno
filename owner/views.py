@@ -4,10 +4,10 @@ from django.http import JsonResponse
 from social_django.models import UserSocialAuth
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
-import os
 from guest.models import User, Establishment, Plate, Menu, Order, OrderItem, Address
 from django.core.paginator import Paginator
 from owner.forms import RegisterEstablishmentForm, PlateForm
+import os
 
 def index(request):
 	if request.user.first_login:
@@ -34,7 +34,7 @@ def set_establishment_info(request):
 			delivery=delivery,
 			opens_at=form.cleaned_data['opens_at'],			
 			closes_at=form.cleaned_data['closes_at'],
-			image=form.cleaned_data['name']
+			image=form.cleaned_data['file']
 		)
 
 		user = User.objects.filter(user_id=request.user.user_id).first()
