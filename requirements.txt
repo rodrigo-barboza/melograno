@@ -5,6 +5,7 @@ cffi==1.15.1
 charset-normalizer==3.0.1
 cryptography==39.0.1
 defusedxml==0.7.1
+dj-database-url==1.2.0
 Django==4.1.7
 django-widget-tweaks==1.4.12
 Faker==17.3.0
