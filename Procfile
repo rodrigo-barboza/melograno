@@ -1,0 +1,1 @@
+web: gunicorn melograno.wsgi --log-file -
