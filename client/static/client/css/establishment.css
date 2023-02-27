@@ -70,6 +70,7 @@ header {
     font-size: medium;
     font-size: 20px;
     margin-top: 30px;
+    color: #00d22e;
 }
 
 .product-title {
@@ -112,9 +113,10 @@ header {
 }
 
 .image-container-modal {
-    width: 400px;
-    height: 300px;
-    border-radius: 15px;
+    width: 300px;
+    height: 200px;
+    margin-right: 20px;
+    border-radius: 10px;
     background-size: cover;
     background-position: center;
 }

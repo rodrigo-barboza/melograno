@@ -46,7 +46,7 @@ class Establishment(models.Model):
     delivery = models.BooleanField(default=False)
     opens_at = models.TimeField()
     closes_at = models.TimeField()
-    image = models.FileField(upload_to='imagens/')
+    image = models.FileField(upload_to='guest/static/guest/images')
     address_id = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
 
 class User(AbstractUser):
@@ -93,7 +93,7 @@ class Plate(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField(default=0.0)
     description = models.TextField()
-    image = models.CharField(max_length=100)
+    image = models.FileField(upload_to='guest/static/guest/images')
     category = models.CharField(choices=FOOD_TYPES, max_length=20, default='plate')
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
 

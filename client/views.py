@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 import random
 import json
+import os
 
 def establishment(request, establishment_id):
 	context = {}
@@ -18,16 +19,24 @@ def establishment(request, establishment_id):
 	context['establishment'] = get_fancy_establishment(establishment)
 
 	plates = get_menu_with_plates(establishment_id)
+	plates = fancy_products(plates)
 	plates = Paginator(plates, 4)
 	page_number = request.GET.get('page')
 	context['plates'] = plates.get_page(page_number)
 	
 	drinks = get_menu_with_drinks(establishment_id)
+	drinks = fancy_products(drinks)
 	drinks = Paginator(drinks, 4)
 	page_number = request.GET.get('page')
 	context['drinks'] = drinks.get_page(page_number)
 
 	return render(request, 'client/pages/establishment.html', context)
+
+def fancy_products(products):
+	for product in products:
+		if 'guest' in product.image.path:
+			product.image = os.path.basename(product.image.path)
+	return products
 
 def my_orders(request):
 	user_id = request.user.user_id
@@ -101,6 +110,7 @@ def get_fancy_establishments(establishments):
 		establishment.name = establishment.name.title()
 		establishment.outline = range(5 - establishment.rate)
 		establishment.rate = range(establishment.rate)
+		establishment.image = os.path.basename(establishment.image.path)
 
 	return establishments
 
@@ -111,6 +121,7 @@ def get_fancy_establishment(establishment):
 	establishment.name = establishment.name.title()
 	establishment.outline = range(5 - establishment.rate)
 	establishment.rate = range(establishment.rate)
+	establishment.image = os.path.basename(establishment.image.path)
 
 	return establishment
 
@@ -142,12 +153,23 @@ def get_plate(request, plate_id):
 			'errors': 'Prato não encontrado.'
 		}, status=406)
 
-	plate_dict = model_to_dict(plate)
+	plate_dict = fix_image(plate)
 
 	return JsonResponse({
 		'plate': plate_dict
 	}, status=200)
 
+def fix_image(plate):
+	fancy_plate  = {}
+	fancy_plate['plate_id'] = plate.plate_id
+	fancy_plate['name'] = plate.name
+	fancy_plate['price'] = plate.price
+	fancy_plate['description'] = plate.description
+	fancy_plate['category'] = plate.category
+	fancy_plate['menu_id'] = plate.menu_id.menu_id
+	fancy_plate['image'] = os.path.basename(plate.image.path)
+
+	return fancy_plate
 
 def is_social_user(request_user):
 	has_user = UserSocialAuth.objects.filter(
@@ -272,7 +294,6 @@ def get_cart_plates(cart_items):
 			'name': plate.name,
 			'price': plate.price,
 			'description': plate.description,
-			'image': plate.image,
 			'category': plate.category,
 			'quantity': cart_item.quantity
 		})
@@ -365,6 +386,5 @@ def get_filtered_establishment(filter):
 	establishments = Establishment.objects.all()
 
 	for establishment in establishments:
-		print(str(filter).lower(),  establishment.name.lower())
 		if str(filter).lower() in establishment.name.lower():
 			return establishment

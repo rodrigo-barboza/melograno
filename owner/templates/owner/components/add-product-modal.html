@@ -1,56 +1,143 @@
-
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="{% static 'owner/css/product-modal.css' %}" rel="stylesheet">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-</head>
-<body>
-    <form method="post" action="{% url 'owner:add_product' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="modal-ex">
-            <div class="modal-content-ex">
-                <div class="add-product-header">
-                    <h5>Adicionar um novo produto</h5>
-                    <i class="ph-x" id="fechar-modal"></i>
-                </div>
+<link href="{% static 'owner/css/product-modal.css' %}" rel="stylesheet">
+
+<div class="modal fade" id="new-product-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar um novo produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Imagem do produto</label>
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" type="file" name="file" id="formFile">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nome do produto</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" name="name" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Descrição do produto</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                        rows="3"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Preço</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" name="price" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
                 </div>
                 <label for="exampleInputEmail1" class="form-label">Categoria</label>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" name="category" aria-label="Default select example">
                     <option selected>escolha uma categoria</option>
-                    <option value="1">Mexicana</option>
-                    <option value="2">Saudável</option>
-                    <option value="3">Brasileira</option>
-                    <option value="4">Japonesa</option>
-                    <option value="5">Italiana</option>
-                  </select>
-                  <div class="add-product-footer">
-                    <button type="submit" class="add-btn">Adicionar produto</button>
-                  </div>
+                    <option value="plate">Prato</option>
+                    <option value="drink">Bebida</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    style="border: none;">Cancelar</button>
+                <button id="add-product-btn" class="btn btn-primary"
+                    style="background-color: #F34444; border: none;">Adicionar</button>
             </div>
         </div>
-    </form>
-</body>
-</html>
+    </div>
+</div>
+
+<script>
+    const createProductPayload = () => {
+        const fields = [
+            'file',
+            'name',
+            'description',
+            'price',
+            'category',
+        ];
+
+        let payload = new FormData();
+
+        let fileInput = document.querySelector('input[name="file"]');
+        payload.append('file', fileInput.files[0]);
+
+        fields.forEach(field => {
+            let currentFieldValue = document.querySelector(`input[name="${field}"]`)?.value
+
+            if (field === 'price') {
+                currentFieldValue = parseFloat(currentFieldValue.replace(',', '.'));
+            }
+
+            if (field === 'description') {
+                currentFieldValue = document.querySelector(`textarea[name="${field}"]`)?.value
+            }
+
+            if (field === 'category') {
+                currentFieldValue = document.querySelector(`select[name="${field}"]`)?.value
+            }
+
+            payload.append(field, currentFieldValue);
+        });
+
+        return payload;
+    };
+
+    const addProductBtn = document.querySelector('#add-product-btn');
+
+    addProductBtn.addEventListener('click', () => {
+        axios.post('/owner/add-product', createProductPayload())
+            .then(response => {
+                setAlertWithConfirmation(
+                    'success',
+                    {
+                        title: response.data.message,
+                        text: ''
+                    }
+                );
+            })
+            .catch(error => {
+                setAlert('error', getInvalidFieldMessage(error));
+            });
+    });
+
+    const getInvalidFieldMessage = (error) => {
+        const err = error.response.data.errors;
+        const fields = {
+            'file': 'Imagem do produto',
+            'name': 'Nome do produto',
+            'description': 'Descrição do produto',
+            'price': 'Preço',
+            'category': 'Categoria',
+        };
+        const field = Object.keys(err)[0];
+        const value = Object.values(err)[0][0];
+
+        return {
+            title: fields[field],
+            text: value,
+        };
+    };
+
+    const setAlert = (type, { title, text }) => {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: type,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#F34444',
+        });
+    };
+
+    const setAlertWithConfirmation = (type, { title, text }) => {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: type,
+            confirmButtonText: 'Certo',
+            confirmButtonColor: '#146C43',
+        }).then((result) => {
+            if (result) {
+                window.location.href = '/guest/login';
+            }
+        });
+    };
+</script>

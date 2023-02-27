@@ -36,7 +36,7 @@
             <div class="grid">
                 {% for establishment in establishments %}
                     <a class="item" style="width: 450px;" href="{% url 'client:establishment' establishment.establishment_id %}">
-                        <div class="image-container" style="background-image: url('{{ establishment.image }}')"></div>
+                        <div class="image-container" style="background-image: url('{% static "guest/images/" %}{{establishment.image}}')"></div>
                         <div class="text-area">
                             <p class="nome-estabelecimento">{{ establishment.name }} </p>
                             <p class="time">Tempo médio ◍ {{ establishment.avg_time }}</p>

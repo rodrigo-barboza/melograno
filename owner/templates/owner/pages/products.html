@@ -7,53 +7,114 @@
 
 {% include 'owner/components/add-product-modal.html' %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'owner/css/products.css'%}"/>
-<script src="https://unpkg.com/phosphor-icons"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'owner/css/products.css'%}" />
 
 <header class="d-flex justify-content-between p-3">
     <h3 class="align-self-center">Meus produtos</h3>
-    <button class="new-product" id="botao-add">
-       Adicionar novo
+    <button class="new-product" id="botao-add" data-bs-toggle="modal" data-bs-target="#new-product-modal">
+        Adicionar novo
     </button>
 </header>
 
-
+{% if page_obj %}
 <div class="body-content">
+    {% for plate in page_obj.object_list %}
     <div class="products">
-        {% for product in products %}
-        <h4 class="product-title">{{product.name}}</h4>
-        <p class="product-text-description">
-            {{product.description}}
-        </p>
-        <div class="product-footer">
-            <h5 class="product-text-price" style="color: #00d22e">{{product.price}}</h5>
-            <div class="product-tag">
-                <h6>{{product.category}}</h6>
+        <div class="d-flex justify-content-between">
+            <h4 class="product-title">{{plate.name}}</h4>
+            <div><i onclick="deleteProduct({{ plate.plate_id }})" style="color: #f34444; cursor: pointer;" data-feather="trash"></i></div>
+        </div>
+        <div class="d-flex mt-3">
+            <div class="image-container me-4" style="background-image: url('{% static "guest/images/" %}{{plate.image}}')"></div>
+            <div>
+                <p class="product-text-description">
+                    {{plate.description}}
+                </p>
+                <div class="product-footer d-flex flex-column align-items-start">
+                    <h5 class="product-text-price">R$ {{plate.price}}</h5>
+                    <div class="badge bg-secondary">
+                        {{plate.category}}
+                    </div>
+                </div>
             </div>
-        {% endfor %}
         </div>
     </div>
+    {% endfor %}
+</div>
+<div class="blank-space"></div>
+<div>
+    <div class="pagination below-navbar">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a class="page_link" href="?page=1">&laquo; Primeira</a>
+            <a class="page_link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+            <a class="page_link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+            <a class="page_link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% else %}
+<div class="body-content">
+    <div class="empty_state">
+        <p>Não há nada aqui!</p>
+        <img src="{% static 'owner/images/empty-state.png' %}" alt="Vazio">
+    </div>
+</div>
+{% endif %}
 
 <script>
-    var modal = document.querySelector(".modal-ex");
-    var botao = document.querySelector("#botao-add");
-    var fechar = document.querySelector("#fechar-modal");
-    botao.addEventListener('click', function() {
-        modal.style.display = 'flex'
-    })
+    feather.replace();
 
-    fechar.addEventListener('click', function() {
-        modal.style.display = 'none'
-    })
+    const deleteProduct = (productId) => {
+        confirmMessage(productId);
+    };
 
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) { // verifica se o clique ocorreu fora do modal
-            modal.style.display = "none"; // fecha o modal
-        }
-});
+    const confirmMessage = (productId) => {
+        Swal.fire({
+            title: 'Tem certeza que dejesa excluir este produto?',
+            text: 'Esta ação não poderá ser desfeita.',
+            icon: 'warning',
+            confirmButtonText: 'Excluir',
+            confirmButtonColor: '#146C43',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteProductById(productId)
+            }
+        });
+    };
 
-
-
+    const deleteProductById = (productId) => {
+        axios.post(`/owner/delete-product/${productId}`)
+            .then(response => {
+                Swal.fire({
+                    title: response.data.message,
+                    text: '',
+                    icon: 'success',
+                    confirmButtonText: 'Excluir',
+                    confirmButtonColor: '#146C43',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                setAlert('error', {
+                    title: error.response.message,
+                    text: '',
+                });
+            });
+    };
 </script>
-
 {% endblock %}

@@ -4,15 +4,10 @@ from django.http import JsonResponse
 from social_django.models import UserSocialAuth
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
-import json
-from guest.models import User, Establishment, Plate, Order, OrderItem, Address
+import os
+from guest.models import User, Establishment, Plate, Menu, Order, OrderItem, Address
 from django.core.paginator import Paginator
-<<<<<<< HEAD
-from .models import Product
-from .forms import ProductForm
-=======
-from owner.forms import RegisterEstablishmentForm
->>>>>>> 2f0926d06953a36e3354b386ebec0dc8da0c46d4
+from owner.forms import RegisterEstablishmentForm, PlateForm
 
 def index(request):
 	if request.user.first_login:
@@ -59,22 +54,69 @@ def establishment_details(request):
 	return render(request, 'owner/establishment-signup.html')
 
 def establishment_products(request):
-	products = Product.objects.all()
-	return render(request, 'owner/pages/products.html', {'products': products})
+	mainEstablishment = request.user.establishment_id
+	menus = Menu.objects.filter(establishment_id=mainEstablishment.establishment_id).all()
+	aux = []
+	for menu in menus:
+		aux += Plate.objects.filter(menu_id=menu.menu_id).all()
+	aux = fancy_plates(aux)
 
+	paginator = Paginator(aux, 6) # Mostra até 6 pedidos por página
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+
+	context = {'page_obj': page_obj}
+	return render(request, 'owner/pages/products.html', context)
+
+def fancy_plates(plates):
+	categories = {
+		'plate': 'Prato',
+		'drink': 'Bebida',
+	}
+
+	for plate in plates:
+		plate.category = categories[plate.category]
+		if 'guest' in plate.image.path:
+			plate.image = os.path.basename(plate.image.path)
+
+	return plates
+
+
+@csrf_exempt
 def add_product(request):
-    if str(request.method) == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            print('hello1')  # adicionado para verificar se os dados estão sendo recebidos corretamente
-            form.save()
-            return redirect('establishment_products')
-        else:
-            messages.error(request, 'Please correct the errors below.')
-            print('Form is invalid:', form.errors)
-    else:
-        form = ProductForm()
-    return redirect('owner:establishment_products')
+	form = PlateForm(request.POST, request.FILES)
+
+	establishment_menu = get_establishment_menu(request)
+
+	if form.is_valid():
+		Plate.objects.create(
+			name=form.cleaned_data['name'],
+			price=form.cleaned_data['price'],
+			description=form.cleaned_data['description'],
+			image=form.cleaned_data['file'],
+			category=form.cleaned_data['category'],
+			menu_id=establishment_menu,
+		)
+
+		return JsonResponse({
+			'message': 'Produto adicionado com sucesso!'
+		})
+	
+	errors = dict(form.errors.items())
+	return JsonResponse({'errors': errors}, status=406)
+
+
+def get_establishment_menu(request):
+	menu = Menu.objects.filter(
+		establishment_id=request.user.establishment_id
+	).first()
+
+	if not menu:
+		menu = Menu.objects.create(
+			establishment_id=request.user.establishment_id
+		)
+
+	return menu
 
 
 def order_history(request):
@@ -102,3 +144,19 @@ def establishment_profile(request):
 	context = {'info':mainEstablishment}
 	return render(request, 'owner/pages/establishment-profile.html', context)
 
+@csrf_exempt
+def delete_product(request, plate_id):
+	plate = Plate.objects.filter(
+		plate_id=plate_id
+	).first()
+
+	if not plate:
+		return JsonResponse({
+			'message': 'Produto não encontrado'
+		}, status=404)
+
+	plate.delete()
+
+	return JsonResponse({
+		'message': 'Produto deletado com sucesso!'
+	}, status=200)

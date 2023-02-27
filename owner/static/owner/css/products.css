@@ -92,3 +92,17 @@ header {
 #current-page{
     color: #F34444;
 }
+
+.image-container {
+    width: 163px;
+    height: 163px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+}
+
+.product-text-price {
+    font-size: medium;
+    font-size: 20px;
+    color: #00d22e;
+}
