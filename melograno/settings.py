@@ -85,6 +85,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'melograno.wsgi.application'
 
+SESSION_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
