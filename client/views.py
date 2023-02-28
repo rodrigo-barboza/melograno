@@ -261,7 +261,7 @@ def get_cart_count(request):
 		'cart': list(cart_items.values())
 	}, status=200)
 
-
+@csrf_exempt
 def get_cart(request):
 	user_cart = Cart.objects.filter(
 		user_id=request.user.user_id
