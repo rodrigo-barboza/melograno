@@ -373,6 +373,7 @@ def get_order_price(cart_items):
 
 	return price
 
+@csrf_exempt
 def establishment_filter(request):
 	context = {'csrf_token': csrf.get_token(request)}
 	filter = request.POST['establishment_filter']
