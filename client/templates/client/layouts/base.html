@@ -112,6 +112,145 @@
     };
 
     getCartCount();
+
+    const getCart = () => {
+        axios.get('/client/cart-all-info')
+            .then(response => {
+                const cartItems = response.data.cart;
+                addItemsToCart(cartItems);
+            });
+    };
+
+    const addItemsToCart = (cartItems) => {
+        const productItem = document.querySelector('#product-item');
+        const products = document.querySelector('#all-products');
+        const additionalInfo = document.querySelector('#additional-info');
+        const clearCartButton = document.querySelector('#clear-cart-button');
+        const cartEmptyState = document.querySelector('#cart-empty-state');
+
+        products.innerHTML = '';
+
+        if (cartItems?.length > 0) {
+            additionalInfo.style.display = 'block';
+            clearCartButton.style.display = 'block';
+            cartEmptyState.classList.remove('cart-empty-show');
+            cartEmptyState.classList.add('cart-empty');
+
+            cartItems.forEach(item => {
+                const currentItem = productItem.cloneNode(true);
+                currentItem.querySelector('.descricao').innerHTML = `
+                    <span class='badge bg-danger me-2'>x${item.quantity}</span>
+                    ${item.name.toUpperCase()}
+                `;
+                let price = item.price.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2, maximumFractionDigits: 2
+                });
+                currentItem.querySelector('.valor').innerHTML = `R$ ${price}`;
+                currentItem.style.display = 'block';
+                products.appendChild(currentItem);
+            });
+    
+            let subTotalPrice = cartItems.reduce((sum, item) => {
+                return sum + (item.price * item.quantity);;
+            }, 0);
+    
+            subTotalPrice = subTotalPrice.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            });
+    
+            document.querySelector('.valor-subtotal').innerHTML = `R$ ${subTotalPrice}`;
+            document.querySelector('.valor-total').innerHTML = `R$ ${subTotalPrice}`;
+        } else {
+            additionalInfo.style.display = 'none';
+            clearCartButton.style.display = 'none';
+            cartEmptyState.classList.remove('cart-empty');
+            cartEmptyState.classList.add('cart-empty-show');
+            document.querySelector('.valor-subtotal').innerHTML = `R$ 00,00`;
+            document.querySelector('.valor-total').innerHTML = `R$ 00,00`;
+        }
+    };
+
+    const deliveryRadio = document.querySelectorAll('input[name="delivery"]');
+    const paymentRadio = document.querySelector('input[name="payment_method"]:checked');
+
+    deliveryRadio.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                const delivery = document.querySelector('.delivery-area');
+                if (checkbox.value === 'yes') {
+                    delivery.style.display = 'block';
+                    let total = document.querySelector('.valor-subtotal').innerHTML;
+                    total = parseFloat(total.replace('R$ ', '').replace(',', '.'));
+
+                    let frete = document.querySelector('.valor-entrega').innerHTML;
+                    frete = parseFloat(frete.replace('R$ ', '').replace(',', '.'));
+
+                    total = (total + frete).toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2, maximumFractionDigits: 2
+                    });
+                    document.querySelector('.valor-total').innerHTML = `R$ ${total}`;
+                } else {
+                    delivery.style.display = 'none';
+                    let total = document.querySelector('.valor-subtotal').innerHTML;
+                    total = parseFloat(total.replace('R$ ', '').replace(',', '.'));
+
+                    total = total.toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2, maximumFractionDigits: 2
+                    });
+
+                    document.querySelector('.valor-total').innerHTML = `R$ ${total}`;
+                }
+            }
+        });
+    });
+
+    const clearCart = () => {
+        
+        Swal.fire({
+            title: 'Deseja mesmo esvaziar seu carrinho?',
+            text: 'Todos os itens serão removidos',
+            icon: 'warning',
+            confirmButtonText: 'Esvaziar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#146C43',
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/client/clear-cart')
+                    .then(response => {
+                        getCart();
+                        getCartCount();
+                    });
+            }
+        });
+    };
+
+    const createOrder = () => {
+        const deliveryR = document.querySelector('input[name="delivery"]:checked');
+        const paymentR = document.querySelector('input[name="payment_method"]:checked');
+
+        axios.post('/client/order/create', {
+            'delivery': deliveryR.value,
+            'payment_method': paymentR.value,
+        }).then(response => {
+            setAlert('success', {
+                title: response.data.message,
+                text: 'Acompanhe o seu pedido na tela de "meus pedidos"'
+            });
+            getCart();
+            getCartCount();
+        })
+    };
+
+    const setAlert = (type, { title, text }) => {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: type,
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#F34444',
+        });
+    };
 </script>
 
 </html>
